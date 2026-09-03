@@ -35,7 +35,7 @@
     <a href="index.html#tarifs">Tarifs</a>
     <a href="index.html#avis" onclick="revealAvis(event)">Avis</a>
   </div>
-  <a href="#rdv" class="nav-cta">Prendre RDV</a>
+  <a href="rdv.html" class="nav-cta">Prendre RDV</a>
 </nav>
 
 <!-- HERO -->
@@ -54,7 +54,7 @@
       <span class="hero-tag">💵 Paiement en espèces</span>
     </div>
     <div class="hero-btns">
-      <a href="#rdv" class="btn-primary">Prendre rendez-vous</a>
+      <a href="rdv.html" class="btn-primary">Prendre rendez-vous</a>
       <a href="#tarifs" class="btn-secondary">Voir les tarifs</a>
     </div>
   </div>
@@ -340,86 +340,7 @@
       <strong id="total-amount">0 €</strong>
     </div>
 
-    <a href="#rdv" class="btn-primary" style="display:block;text-align:center;margin-top:16px;padding:15px;">Finaliser ma commande — Prendre rendez-vous →</a>
-  </div>
-</section>
-
-<!-- RDV WIZARD -->
-<section class="section section-alt" id="rdv">
-  <div class="section-header">
-    <span class="section-label">Planifiez</span>
-    <h2>Prendre rendez-vous</h2>
-    <p>Choisissez un créneau disponible, je me déplace chez vous en Haute-Savoie.</p>
-  </div>
-
-  <div class="wizard-wrap">
-
-    <div class="stepper" id="stepper"></div>
-
-    <!-- STEP 1: RDV -->
-    <div class="step-panel active" id="panel-0">
-      <div id="calendar-wrap"><div class="loading-placeholder">Chargement du calendrier…</div></div>
-      <div class="slot-panel" id="slot-panel">
-        <div class="slot-panel-title" id="slot-panel-title"></div>
-        <div class="slot-grid" id="slot-grid"></div>
-      </div>
-      <div class="wizard-nav">
-        <button class="btn-primary" id="btn-step1-next" disabled onclick="goToStep(1)" style="width:100%">Étape suivante →</button>
-      </div>
-    </div>
-
-    <!-- STEP 2: Coordonnées -->
-    <div class="step-panel" id="panel-1">
-      <div class="recap-box">🗓 <span id="recap-date-1">—</span></div>
-      <label class="field-label">Prénom et nom</label>
-      <input type="text" class="full-input" id="rdv-nom" placeholder="ex: Camille Dupont">
-      <label class="field-label">Téléphone</label>
-      <input type="tel" class="full-input" id="rdv-tel" placeholder="ex: 06 12 34 56 78">
-      <label class="field-label">Adresse</label>
-      <input type="text" class="full-input" id="rdv-adresse" placeholder="Adresse, commune (Haute-Savoie)">
-      <div class="wizard-nav">
-        <button class="btn-secondary" onclick="goToStep(0)">← Retour</button>
-        <button class="btn-primary" onclick="validateStep2()">Étape suivante →</button>
-      </div>
-    </div>
-
-    <!-- STEP 3: Paiement -->
-    <div class="step-panel" id="panel-2">
-      <div class="recap-box">🗓 <span id="recap-date-2">—</span></div>
-      <div class="payment-card">
-        <div class="payment-icon">💵</div>
-        <div>
-          <h4>Paiement en espèces</h4>
-          <p>Le règlement se fait en espèces, directement chez vous, une fois la pose terminée et validée. Aucun acompte, aucun paiement en ligne.</p>
-        </div>
-      </div>
-      <div class="estimate-box" id="estimate-box">
-        <div class="est-label">Montant estimé</div>
-        <div class="est-amount" id="est-amount">À définir sur place</div>
-        <div class="est-note" id="est-note">Ajoutez vos fenêtres dans le configurateur ci-dessus pour une estimation, ou laissez-moi mesurer sur place — à partir de 45 €/fenêtre.</div>
-      </div>
-      <label class="checkbox-row">
-        <input type="checkbox" id="payment-ack">
-        <span>J'ai compris que le paiement s'effectue en espèces à la fin de l'intervention.</span>
-      </label>
-      <div class="wizard-nav">
-        <button class="btn-secondary" onclick="goToStep(1)">← Retour</button>
-        <button class="btn-primary" id="btn-confirm" onclick="confirmRdv()">Confirmer mon RDV ✓</button>
-      </div>
-    </div>
-
-    <!-- STEP 4: Confirmation -->
-    <div class="step-panel" id="panel-3">
-      <div class="success-state">
-        <div class="success-circle">✅</div>
-        <h3>Rendez-vous confirmé !</h3>
-        <div class="success-recap" id="success-recap"></div>
-        <p class="confirm-note">Envoyez-moi un SMS de confirmation avec le bouton ci-dessous — je n'ai pas (encore) de secrétariat. 😉 En cas d'imprévu, contactez-moi directement.</p>
-        <a href="#" id="sms-confirm-link" class="btn-primary" style="display:block;text-align:center;margin-bottom:10px;padding:15px;">💬 Envoyer le SMS de confirmation</a>
-        <button class="btn-secondary" onclick="resetWizard()">Prendre un autre rendez-vous</button>
-      </div>
-    </div>
-
+    <a href="rdv.html" class="btn-primary" style="display:block;text-align:center;margin-top:16px;padding:15px;">Finaliser ma commande — Prendre rendez-vous →</a>
   </div>
 </section>
 
@@ -478,7 +399,7 @@
     <a href="#avis" onclick="revealAvis(event)">Donner / voir les avis</a>
     <a href="#services">Services</a>
     <a href="#tarifs">Tarifs</a>
-    <a href="#rdv">Rendez-vous</a>
+    <a href="rdv.html">Rendez-vous</a>
   </div>
   <div class="footer-bottom">© 2026 MoustiKO · Tous droits réservés</div>
 </footer>
@@ -551,12 +472,12 @@
     renderWindowsList();
     document.getElementById('room').value = '';
     showToast('✓ Fenêtre ajoutée à votre liste');
-    updateEstimateBox();
+    persistWindows();
   }
   function removeWindow(i) {
     windows.splice(i, 1);
     renderWindowsList();
-    updateEstimateBox();
+    persistWindows();
   }
   function renderWindowsList() {
     const list = document.getElementById('windows-list');
@@ -577,18 +498,8 @@
     }
   }
 
-  function updateEstimateBox() {
-    const box = document.getElementById('est-amount');
-    const note = document.getElementById('est-note');
-    if (!box) return;
-    if (windows.length > 0) {
-      const total = windows.reduce((s, w) => s + w.price, 0);
-      box.textContent = total + ' €';
-      note.textContent = 'Basé sur les ' + windows.length + ' fenêtre(s) ajoutée(s) dans le configurateur. Montant confirmé après mesure exacte sur place.';
-    } else {
-      box.textContent = 'À définir sur place';
-      note.textContent = 'Ajoutez vos fenêtres dans le configurateur ci-dessus pour une estimation, ou laissez-moi mesurer sur place — à partir de 45 €/fenêtre.';
-    }
+  function persistWindows() {
+    try { localStorage.setItem('moustiko_windows', JSON.stringify(windows)); } catch(e) {}
   }
 
   /* ============ TOAST ============ */
@@ -616,293 +527,8 @@
     setTimeout(() => toast.classList.remove('show'), 3000);
   }
 
-  /* ============ CALENDRIER ============ */
-  const DAY_ABBR = ['dim','lun','mar','mer','jeu','ven','sam'];
-  const MONTH_NAMES = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-
-  // Vendredi : à partir de 17h, 1h d'écart. Samedi/Dimanche : journée classique.
-  const SLOTS_BY_DAY = {
-    5: ['17h00','18h00','19h00','20h00'],                          // vendredi
-    6: ['8h30','9h30','10h30','11h30','13h30','14h30','15h30','16h30'], // samedi
-    0: ['8h30','9h30','10h30','11h30','13h30','14h30','15h30','16h30']  // dimanche
-  };
-
-  function pad2(n){ return n<10 ? '0'+n : ''+n; }
-  function dateKey(d){ return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate()); }
-  function hashStr(str){
-    let h = 0;
-    for (let i=0;i<str.length;i++){ h = (h*31 + str.charCodeAt(i)) >>> 0; }
-    return h;
-  }
-
-  let calendarDays = []; // {dateObj, key, dayAbbr, dayNum, closed, slots:[{time,taken}]}
-  let bookedSlots = []; // from storage, array of "key|time"
-
-  function buildCalendar() {
-    let start = new Date();
-    start.setDate(start.getDate() + 1);
-    start.setHours(0,0,0,0);
-
-    // ne garder que vendredi (5), samedi (6), dimanche (0)
-    let raw = [];
-    for (let i=0; i<60 && raw.length<24; i++) {
-      const d = new Date(start);
-      d.setDate(start.getDate() + i);
-      if ([0,5,6].includes(d.getDay())) raw.push(d);
-    }
-
-    // grouper par blocs de 3 (ven-sam-dim) pour repartir les creneaux "pris"
-    calendarDays = [];
-    for (let wStart = 0; wStart < raw.length; wStart += 3) {
-      const weekChunk = raw.slice(wStart, wStart + 3);
-      let weekSlots = [];
-      weekChunk.forEach(d => {
-        const key = dateKey(d);
-        const times = SLOTS_BY_DAY[d.getDay()] || [];
-        times.forEach(time => {
-          weekSlots.push({ key, time, score: hashStr(key+'_'+time) });
-        });
-      });
-      weekSlots.sort((a,b) => b.score - a.score);
-      // on remplit environ 55% des creneaux de la periode pour rester credible
-      const capTaken = Math.floor(weekSlots.length * 0.55);
-      const takenSet = new Set(weekSlots.slice(0, capTaken).map(s => s.key+'|'+s.time));
-
-      weekChunk.forEach(d => {
-        const key = dateKey(d);
-        const times = SLOTS_BY_DAY[d.getDay()] || [];
-        const slots = times.map(time => ({
-          time,
-          taken: takenSet.has(key+'|'+time) || bookedSlots.includes(key+'|'+time)
-        }));
-        calendarDays.push({
-          dateObj: d,
-          key,
-          dayAbbr: DAY_ABBR[d.getDay()],
-          dayNum: pad2(d.getDate()),
-          month: d.getMonth(),
-          year: d.getFullYear(),
-          closed: false,
-          slots
-        });
-      });
-    }
-  }
-
-  function renderCalendar() {
-    const wrap = document.getElementById('calendar-wrap');
-    let html = '';
-    let currentMonthKey = null;
-    let blockDays = [];
-    let blocks = [];
-
-    calendarDays.forEach(day => {
-      const mKey = day.year+'-'+day.month;
-      if (mKey !== currentMonthKey) {
-        if (blockDays.length) blocks.push(blockDays);
-        blockDays = [];
-        currentMonthKey = mKey;
-      }
-      blockDays.push(day);
-    });
-    if (blockDays.length) blocks.push(blockDays);
-
-    // vendredi=0, samedi=1, dimanche=2
-    const COL_MAP = { 5: 0, 6: 1, 0: 2 };
-
-    blocks.forEach(block => {
-      const first = block[0];
-      const monthLabel = MONTH_NAMES[first.month].toUpperCase() + ' ' + first.year;
-      let cellsHtml = '';
-      const colIndex = COL_MAP[first.dateObj.getDay()];
-      for (let i=0; i<colIndex; i++) cellsHtml += '<div class="day-cell empty"></div>';
-
-      let lastCol = colIndex;
-      block.forEach(day => {
-        const col = COL_MAP[day.dateObj.getDay()];
-        // combler les trous entre jours (ex: si un vendredi manque)
-        for (let i=lastCol+1; i<col; i++) cellsHtml += '<div class="day-cell empty"></div>';
-        lastCol = col;
-
-        const availCount = day.slots.filter(s => !s.taken).length;
-        if (availCount === 0) {
-          cellsHtml += `<div class="day-cell full"><div class="day-top">${day.dayAbbr}. ${day.dayNum}</div><div class="day-avail">Complet</div></div>`;
-        } else {
-          cellsHtml += `<div class="day-cell" id="cell-${day.key}" onclick="selectDay('${day.key}')"><div class="day-top">${day.dayAbbr}. ${day.dayNum}</div><div class="day-avail">${availCount} dispo</div></div>`;
-        }
-      });
-
-      html += `<div class="month-block"><div class="month-header">${monthLabel}</div><div class="days-grid days-grid-3">${cellsHtml}</div></div>`;
-    });
-
-    wrap.innerHTML = html;
-  }
-
-  let selectedDateKey = null;
-  let selectedTime = null;
-
-  function selectDay(key) {
-    document.querySelectorAll('.day-cell.selected').forEach(e => e.classList.remove('selected'));
-    const cell = document.getElementById('cell-' + key);
-    if (cell) cell.classList.add('selected');
-    selectedDateKey = key;
-    selectedTime = null;
-
-    const day = calendarDays.find(d => d.key === key);
-    const panel = document.getElementById('slot-panel');
-    const title = document.getElementById('slot-panel-title');
-    const grid = document.getElementById('slot-grid');
-
-    const label = day.dayAbbr + '. ' + day.dayNum + ' ' + MONTH_NAMES[day.month] + ' ' + day.year;
-    title.textContent = 'Créneaux disponibles — ' + label;
-
-    grid.innerHTML = day.slots.map(s => `
-      <div class="slot-btn ${s.taken ? 'taken' : ''}" ${s.taken ? '' : `onclick="selectTime('${key}','${s.time}', this)"`}>
-        ${s.time}
-      </div>
-    `).join('');
-
-    panel.classList.add('visible');
-    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    document.getElementById('btn-step1-next').disabled = true;
-  }
-
-  function selectTime(key, time, el) {
-    selectedDateKey = key;
-    selectedTime = time;
-    document.querySelectorAll('.slot-btn').forEach(e => {
-      if (!e.classList.contains('taken')) e.classList.remove('selected');
-    });
-    el.classList.add('selected');
-    document.getElementById('btn-step1-next').disabled = false;
-  }
-
-  function getSelectedLabel() {
-    if (!selectedDateKey || !selectedTime) return '—';
-    const day = calendarDays.find(d => d.key === selectedDateKey);
-    return day.dayAbbr + '. ' + day.dayNum + ' ' + MONTH_NAMES[day.month] + ' ' + day.year + ' à ' + selectedTime;
-  }
-
-  /* ============ WIZARD STEPPER ============ */
-  const STEP_LABELS = ['Rendez-vous', 'Coordonnées', 'Paiement', 'Confirmation'];
-  let currentStep = 0;
-
-  function renderStepper() {
-    const stepper = document.getElementById('stepper');
-    stepper.innerHTML = STEP_LABELS.map((label, i) => {
-      let cls = 'step-item';
-      if (i === currentStep) cls += ' active';
-      else if (i < currentStep) cls += ' done';
-      if (i < currentStep) cls += ' clickable';
-      return `
-        <div class="${cls}" ${i < currentStep ? `onclick="goToStep(${i})"` : ''}>
-          <div class="step-line"></div>
-          <div class="step-circle">${i < currentStep ? '✓' : i+1}</div>
-          <div class="step-label">${label}</div>
-        </div>
-      `;
-    }).join('');
-  }
-
-  function goToStep(step) {
-    if (step === 1 && (!selectedDateKey || !selectedTime)) { showToast('⚠️ Choisissez une date et un horaire'); return; }
-    currentStep = step;
-    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('panel-' + step).classList.add('active');
-    renderStepper();
-    if (step === 1 || step === 2) {
-      document.getElementById('recap-date-1') && (document.getElementById('recap-date-1').textContent = getSelectedLabel());
-      document.getElementById('recap-date-2') && (document.getElementById('recap-date-2').textContent = getSelectedLabel());
-    }
-    if (step === 2) updateEstimateBox();
-    document.getElementById('rdv').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  function validateStep2() {
-    const nom = document.getElementById('rdv-nom').value.trim();
-    const tel = document.getElementById('rdv-tel').value.trim();
-    const addr = document.getElementById('rdv-adresse').value.trim();
-    if (!nom || !tel || !addr) { showToast('⚠️ Remplissez tous les champs'); return; }
-    goToStep(2);
-  }
-
-  const FORMSPREE_URL = 'https://formspree.io/f/mwvdylev';
-
-  async function confirmRdv() {
-    if (!document.getElementById('payment-ack').checked) {
-      showToast('⚠️ Cochez la case pour confirmer le mode de paiement');
-      return;
-    }
-    const nom = document.getElementById('rdv-nom').value.trim();
-    const tel = document.getElementById('rdv-tel').value.trim();
-    const addr = document.getElementById('rdv-adresse').value.trim();
-
-    // marquer le creneau pris (stockage partage, pas de donnees personnelles)
-    const slotKey = selectedDateKey + '|' + selectedTime;
-    try {
-      bookedSlots.push(slotKey);
-      await window.storage.set('moustiko_booked_slots', JSON.stringify(bookedSlots), true);
-    } catch(e) { console.error('Erreur stockage creneau', e); }
-
-    const total = windows.reduce((s,w)=>s+w.price,0);
-    const montantTxt = windows.length > 0 ? (total + ' € (espèces)') : 'À définir sur place';
-
-    // envoyer la demande de RDV par email via Formspree
-    try {
-      await fetch(FORMSPREE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          _subject: 'Nouveau RDV MoustiKO — ' + nom,
-          type: 'Nouvelle demande de rendez-vous',
-          date_rdv: getSelectedLabel(),
-          nom: nom,
-          telephone: tel,
-          adresse: addr,
-          montant_estime: montantTxt
-        })
-      });
-    } catch(e) { console.error('Erreur envoi Formspree RDV', e); }
-
-    const recap = document.getElementById('success-recap');
-    recap.innerHTML = `
-      <div class="sr-row"><span>Date</span><span>${getSelectedLabel()}</span></div>
-      <div class="sr-row"><span>Nom</span><span>${nom}</span></div>
-      <div class="sr-row"><span>Téléphone</span><span>${tel}</span></div>
-      <div class="sr-row"><span>Adresse</span><span>${addr}</span></div>
-      <div class="sr-row"><span>Montant</span><span>${montantTxt}</span></div>
-    `;
-
-    // construire le SMS pre-rempli avec les infos du RDV
-    const smsBody = `Bonjour, je confirme mon RDV MoustiKO le ${getSelectedLabel()}. Nom: ${nom}. Adresse: ${addr}. ${montantTxt}, paiement en espèces.`;
-    const smsLink = document.getElementById('sms-confirm-link');
-    smsLink.href = 'sms:+33761559872?body=' + encodeURIComponent(smsBody);
-
-    currentStep = 3;
-    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('panel-3').classList.add('active');
-    renderStepper();
-    document.getElementById('rdv').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  function resetWizard() {
-    selectedDateKey = null;
-    selectedTime = null;
-    document.getElementById('rdv-nom').value = '';
-    document.getElementById('rdv-tel').value = '';
-    document.getElementById('rdv-adresse').value = '';
-    document.getElementById('payment-ack').checked = false;
-    document.getElementById('slot-panel').classList.remove('visible');
-    document.getElementById('btn-step1-next').disabled = true;
-    buildCalendar();
-    renderCalendar();
-    currentStep = 0;
-    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('panel-0').classList.add('active');
-    renderStepper();
-  }
-
   /* ============ AVIS (stockage persistant partage) ============ */
+  const FORMSPREE_URL = 'https://formspree.io/f/mwvdylev';
   let reviews = [];
 
   function timeAgoLabel(dateStr) {
@@ -1054,14 +680,6 @@
   async function init() {
     setupScrollReveal();
     initCookieBanner();
-    try {
-      const res = await window.storage.get('moustiko_booked_slots', true);
-      bookedSlots = res && res.value ? JSON.parse(res.value) : [];
-    } catch(e) { bookedSlots = []; }
-
-    buildCalendar();
-    renderCalendar();
-    renderStepper();
 
     try {
       const res = await window.storage.get('moustiko_reviews', true);
