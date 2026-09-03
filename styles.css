@@ -235,6 +235,8 @@
     margin-left: 0;
     margin-right: 0;
     font-size: 1.65rem;
+    color: var(--blanc);
+    text-shadow: 0 2px 18px rgba(0,0,0,0.35);
   }
 
   .page-hero .hero-sub {
@@ -578,20 +580,26 @@
   .card-image {
     position: relative;
     width: 100%;
-    height: 168px;
+    height: 140px;
     background: var(--vert-pale);
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: auto;
+    height: auto;
+    max-width: 62%;
+    max-height: 62%;
+    object-fit: contain;
     display: block;
     transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 10px rgba(45,50,54,0.12));
   }
 
-  .product-card:hover .card-image img { transform: scale(1.05); }
+  .product-card:hover .card-image img { transform: scale(1.06); }
 
   .card-image .badge-soon,
   .card-image .badge-new {
