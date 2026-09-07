@@ -27,8 +27,18 @@
     <a href="index.html#tarifs">Tarifs</a>
     <a href="index.html#avis">Avis</a>
   </div>
+  <button class="nav-search-btn" onclick="toggleSearch()" aria-label="Rechercher">🔍</button>
   <a href="rdv.html" class="nav-cta">Prendre RDV</a>
 </nav>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" oninput="filterSearch()" placeholder="fenêtre, porte, baie vitrée, velux..." autocomplete="off">
+    <button class="search-close" onclick="closeSearch()" aria-label="Fermer la recherche">✕</button>
+  </div>
+  <div class="search-results" id="search-results"></div>
+</div>
 <!-- PAGE HERO -->
 <section class="page-hero">
   <div class="hero-media">
@@ -40,6 +50,12 @@
     <div class="status-pill available">✓ Disponible dès maintenant</div>
     <h1>Moustiquaire de fenêtre sur mesure</h1>
     <p class="hero-sub">Cadre aluminium et toile tendue, découpés à vos dimensions et posés chez vous sans perçage.</p>
+  </div>
+</section>
+<section class="page-content" style="padding-bottom:0;">
+  <div class="product-intro">
+    <p>Chez MoustiKO, la moustiquaire de fenêtre est mon produit phare&nbsp;: sur mesure, posée sans perçage et disponible dès aujourd'hui en Haute-Savoie. <span class="intro-more">Cadre aluminium renforcé, toile à maille fine, finition noire ou blanche au choix. Je prends les mesures directement chez vous puis je découpe et pose la moustiquaire le jour même, pour un rendu parfaitement ajusté à votre fenêtre.</span></p>
+    <button class="intro-toggle" onclick="toggleIntro(this)">Afficher plus</button>
   </div>
 </section>
 <section class="page-content">
