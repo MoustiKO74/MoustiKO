@@ -35,8 +35,18 @@
     <a href="index.html#tarifs">Tarifs</a>
     <a href="index.html#avis" onclick="revealAvis(event)">Avis</a>
   </div>
+  <button class="nav-search-btn" onclick="toggleSearch()" aria-label="Rechercher">🔍</button>
   <a href="rdv.html" class="nav-cta">Prendre RDV</a>
 </nav>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" oninput="filterSearch()" placeholder="fenêtre, porte, baie vitrée, velux..." autocomplete="off">
+    <button class="search-close" onclick="closeSearch()" aria-label="Fermer la recherche">✕</button>
+  </div>
+  <div class="search-results" id="search-results"></div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -48,11 +58,6 @@
     <div class="hero-badge">✦ Depuis 2026</div>
     <h1>Fini les moustiques,<br><span>sans perçage ni tracas</span></h1>
     <p class="hero-sub">Je me déplace chez vous, je mesure, je découpe et je pose vos moustiquaires le jour-même.</p>
-    <div class="hero-meta">
-      <span class="hero-tag">📍 Haute-Savoie (74)</span>
-      <span class="hero-tag">💶 À partir de 45 €</span>
-      <span class="hero-tag">💵 Paiement en espèces</span>
-    </div>
     <div class="hero-btns">
       <a href="rdv.html" class="btn-primary">Prendre rendez-vous</a>
       <a href="#tarifs" class="btn-secondary">Voir les tarifs</a>
@@ -62,6 +67,7 @@
 
 <!-- COMMENT CA MARCHE (remplace la vidéo) -->
 <section class="process-section">
+  <div class="process-card">
   <div class="process-header">
     <span class="section-label">Comment ça marche</span>
     <h2>Trois étapes, un après-midi</h2>
@@ -89,81 +95,6 @@
       </div>
     </div>
   </div>
-</section>
-
-<!-- GALERIE PHOTOS -->
-<section class="section">
-  <div class="section-header">
-    <span class="section-label">En situation</span>
-    <h2>Mes moustiquaires en photos</h2>
-    <p>Pose sans perçage, système magnétique, cadre aluminium renforcé.</p>
-  </div>
-
-  <div class="photo-hero">
-    <img onclick="openLightbox(this.src)" class="zoomable" src="assets/img/installation-fenetre.jpg" alt="Installation d'une moustiquaire MoustiKO sur une fenêtre">
-    <div class="photo-hero-caption">Installation sans perçage — disponible en noir ou blanc</div>
-  </div>
-
-  <div class="gallery-grid">
-    <div class="gallery-card">
-      <div class="gallery-visual">
-        <img onclick="openLightbox(this.src)" class="zoomable" src="assets/img/moustiquaire-cadre-blanc.jpg" alt="Moustiquaire cadre blanc">
-      </div>
-      <div class="gallery-caption">Finition blanche<span class="gc-sub">Discrète, s'intègre partout</span></div>
-    </div>
-    <div class="gallery-card">
-      <div class="gallery-visual">
-        <img onclick="openLightbox(this.src)" class="zoomable" src="assets/img/moustiquaire-cadre-noir.jpg" alt="Moustiquaire cadre noir">
-      </div>
-      <div class="gallery-caption">Finition noire<span class="gc-sub">Idéale sur menuiserie claire</span></div>
-    </div>
-  </div>
-
-  <div class="photo-detail-card">
-    <img onclick="openLightbox(this.src)" class="zoomable" src="assets/img/detail-cadre-toile.jpg" alt="Détail du cadre et de la toile moustiquaire">
-    <div class="photo-detail-text">
-      <h4>Finitions soignées</h4>
-      <p>Coins renforcés, toile tendue sans plis, cadre rigide qui ne se déforme pas avec le temps.</p>
-    </div>
-  </div>
-</section>
-
-<!-- POURQUOI -->
-<section class="section">
-  <div class="section-header">
-    <span class="section-label">Ma promesse</span>
-    <h2>Simple, rapide, propre</h2>
-    <p>Pas d'outillage lourd, pas de gâchis. Une moustiquaire parfaitement adaptée à votre fenêtre.</p>
-  </div>
-  <div class="why-list">
-    <div class="why-item">
-      <div class="why-icon">📐</div>
-      <div class="why-content">
-        <h4>Mesure à domicile</h4>
-        <p>Je me déplace directement chez vous pour prendre les dimensions précises de chaque fenêtre. Aucune erreur possible.</p>
-      </div>
-    </div>
-    <div class="why-item">
-      <div class="why-icon">✂️</div>
-      <div class="why-content">
-        <h4>Découpe sur mesure</h4>
-        <p>Chaque moustiquaire est ajustée au centimètre. Cadre aluminium solide, toile tendue, choix noir ou blanc.</p>
-      </div>
-    </div>
-    <div class="why-item">
-      <div class="why-icon">⚡</div>
-      <div class="why-content">
-        <h4>Pose le jour même</h4>
-        <p>J'arrive, je pose, je repars. Comptez en général moins d'une heure pour équiper plusieurs fenêtres.</p>
-      </div>
-    </div>
-    <div class="why-item">
-      <div class="why-icon">💶</div>
-      <div class="why-content">
-        <h4>45 € la fenêtre — prix fixe</h4>
-        <p>Tarif transparent, payable en espèces une fois la pose terminée. Pas de devis à rallonge, pas d'acompte.</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -229,6 +160,36 @@
     </a>
 
   </div>
+</section>
+
+<!-- GALERIE PHOTOS -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-label">En situation</span>
+    <h2>Mes moustiquaires en photos</h2>
+    <p>Pose sans perçage, système magnétique, cadre aluminium renforcé.</p>
+  </div>
+
+  <div class="photo-hero">
+    <img onclick="openLightbox(this.src)" class="zoomable" src="assets/img/installation-fenetre.jpg" alt="Installation d'une moustiquaire MoustiKO sur une fenêtre">
+    <div class="photo-hero-caption">Installation sans perçage — disponible en noir ou blanc</div>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-card">
+      <div class="gallery-visual">
+        <img onclick="openLightbox(this.src)" class="zoomable" src="assets/img/moustiquaire-cadre-blanc.jpg" alt="Moustiquaire cadre blanc">
+      </div>
+      <div class="gallery-caption">Finition blanche<span class="gc-sub">Discrète, s'intègre partout</span></div>
+    </div>
+    <div class="gallery-card">
+      <div class="gallery-visual">
+        <img onclick="openLightbox(this.src)" class="zoomable" src="assets/img/moustiquaire-cadre-noir.jpg" alt="Moustiquaire cadre noir">
+      </div>
+      <div class="gallery-caption">Finition noire<span class="gc-sub">Idéale sur menuiserie claire</span></div>
+    </div>
+  </div>
+
 </section>
 
 <!-- CONFIGURATEUR -->
@@ -422,6 +383,45 @@
 </div>
 
 <script>
+  /* ============ RECHERCHE ============ */
+  const SEARCH_ITEMS = [
+    { label: 'Moustiquaire de fenêtre', url: 'fenetre.html', keywords: 'fenetre fenêtre window disponible' },
+    { label: 'Moustiquaire de porte', url: 'porte.html', keywords: 'porte door entree entrée' },
+    { label: 'Moustiquaire baie vitrée', url: 'baie-vitree.html', keywords: 'baie vitree vitrée coulissante' },
+    { label: 'Moustiquaire Velux', url: 'velux.html', keywords: 'velux toit fenetre de toit' },
+    { label: 'Prendre rendez-vous', url: 'rdv.html', keywords: 'rdv rendez vous rendezvous reservation' },
+    { label: 'Tarifs & configurateur', url: 'index.html#tarifs', keywords: 'tarif prix devis configurateur' },
+    { label: 'Avis clients', url: 'index.html#avis', keywords: 'avis review commentaire' },
+  ];
+  
+  function toggleSearch() {
+    const overlay = document.getElementById('search-overlay');
+    overlay.classList.toggle('open');
+    if (overlay.classList.contains('open')) {
+      renderSearchResults('');
+      const input = document.getElementById('search-input');
+      input.value = '';
+      setTimeout(() => input.focus(), 50);
+    }
+  }
+  function closeSearch() {
+    document.getElementById('search-overlay').classList.remove('open');
+  }
+  function renderSearchResults(query) {
+    const q = query.trim().toLowerCase();
+    const list = document.getElementById('search-results');
+    const filtered = SEARCH_ITEMS.filter(it => !q || it.label.toLowerCase().includes(q) || it.keywords.includes(q));
+    list.innerHTML = filtered.length
+      ? filtered.map(it => '<a class="search-result" href="' + it.url + '">' + it.label + '</a>').join('')
+      : '<p class="search-empty">Aucun résultat</p>';
+  }
+  function filterSearch() {
+    renderSearchResults(document.getElementById('search-input').value);
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeSearch();
+  });
+
   /* ============ MATERIAUX ============ */
   let selectedMaterial = 'noir';
   function selectMaterial(mat, el) {
