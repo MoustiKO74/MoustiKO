@@ -27,15 +27,35 @@
     <a href="index.html#tarifs">Tarifs</a>
     <a href="index.html#avis">Avis</a>
   </div>
+  <button class="nav-search-btn" onclick="toggleSearch()" aria-label="Rechercher">🔍</button>
   <a href="rdv.html" class="nav-cta">Prendre RDV</a>
 </nav>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" oninput="filterSearch()" placeholder="fenêtre, porte, baie vitrée, velux..." autocomplete="off">
+    <button class="search-close" onclick="closeSearch()" aria-label="Fermer la recherche">✕</button>
+  </div>
+  <div class="search-results" id="search-results"></div>
+</div>
 <!-- PAGE HERO -->
-<section class="page-hero" style="background:linear-gradient(135deg, var(--anthracite) 0%, #3c4650 100%);">
+<section class="page-hero">
+  <div class="hero-media">
+    <img class="hero-bg-img" src="assets/img/hero-bg.jpg" alt="Moustiquaire pour baie vitrée">
+    <div class="hero-overlay"></div>
+  </div>
   <div class="hero-content">
     <a href="index.html#services" class="breadcrumb">← Nos produits</a>
     <div class="status-pill soon">📅 Lancement prévu été 2026</div>
     <h1>Moustiquaire pour baie vitrée</h1>
     <p class="hero-sub">Pour les grandes baies vitrées coulissantes, une solution sur mesure, bientôt disponible.</p>
+  </div>
+</section>
+<section class="page-content" style="padding-bottom:0;">
+  <div class="product-intro">
+    <p>La moustiquaire pour baie vitrée est en préparation, pensée pour les grandes ouvertures coulissantes du salon ou de la terrasse. <span class="intro-more">Deux systèmes seront proposés&nbsp;: un rail plissé compact ou un enrouleur latéral discret, pour ne pas gêner le coulissement de la baie.</span></p>
+    <button class="intro-toggle" onclick="toggleIntro(this)">Afficher plus</button>
   </div>
 </section>
 <section class="page-content">
