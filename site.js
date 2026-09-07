@@ -60,3 +60,48 @@ function initSite() {
 }
 
 initSite();
+
+/* Description produit dépliable */
+function toggleIntro(btn) {
+  const box = btn.closest('.product-intro');
+  const expanded = box.classList.toggle('expanded');
+  btn.textContent = expanded ? 'Afficher moins' : 'Afficher plus';
+}
+/* ============ RECHERCHE ============ */
+const SEARCH_ITEMS = [
+  { label: 'Moustiquaire de fenêtre', url: 'fenetre.html', keywords: 'fenetre fenêtre window disponible' },
+  { label: 'Moustiquaire de porte', url: 'porte.html', keywords: 'porte door entree entrée' },
+  { label: 'Moustiquaire baie vitrée', url: 'baie-vitree.html', keywords: 'baie vitree vitrée coulissante' },
+  { label: 'Moustiquaire Velux', url: 'velux.html', keywords: 'velux toit fenetre de toit' },
+  { label: 'Prendre rendez-vous', url: 'rdv.html', keywords: 'rdv rendez vous rendezvous reservation' },
+  { label: 'Tarifs & configurateur', url: 'index.html#tarifs', keywords: 'tarif prix devis configurateur' },
+  { label: 'Avis clients', url: 'index.html#avis', keywords: 'avis review commentaire' },
+];
+
+function toggleSearch() {
+  const overlay = document.getElementById('search-overlay');
+  overlay.classList.toggle('open');
+  if (overlay.classList.contains('open')) {
+    renderSearchResults('');
+    const input = document.getElementById('search-input');
+    input.value = '';
+    setTimeout(() => input.focus(), 50);
+  }
+}
+function closeSearch() {
+  document.getElementById('search-overlay').classList.remove('open');
+}
+function renderSearchResults(query) {
+  const q = query.trim().toLowerCase();
+  const list = document.getElementById('search-results');
+  const filtered = SEARCH_ITEMS.filter(it => !q || it.label.toLowerCase().includes(q) || it.keywords.includes(q));
+  list.innerHTML = filtered.length
+    ? filtered.map(it => '<a class="search-result" href="' + it.url + '">' + it.label + '</a>').join('')
+    : '<p class="search-empty">Aucun résultat</p>';
+}
+function filterSearch() {
+  renderSearchResults(document.getElementById('search-input').value);
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeSearch();
+});
