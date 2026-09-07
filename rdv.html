@@ -27,8 +27,18 @@
     <a href="index.html#tarifs">Tarifs</a>
     <a href="index.html#avis">Avis</a>
   </div>
+  <button class="nav-search-btn" onclick="toggleSearch()" aria-label="Rechercher">🔍</button>
   <a href="rdv.html" class="nav-cta">Prendre RDV</a>
 </nav>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" oninput="filterSearch()" placeholder="fenêtre, porte, baie vitrée, velux..." autocomplete="off">
+    <button class="search-close" onclick="closeSearch()" aria-label="Fermer la recherche">✕</button>
+  </div>
+  <div class="search-results" id="search-results"></div>
+</div>
 <!-- PAGE HERO -->
 <section class="page-hero">
   <div class="hero-media">
