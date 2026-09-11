@@ -674,14 +674,16 @@
 
   /* ── FORMATS / FENETRES ── */
   .windows-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 12px;
     max-width: 480px;
     margin: 0 auto;
   }
 
   .window-item {
+    flex: 0 1 calc(50% - 6px);
     background: var(--blanc);
     border: 1.5px solid var(--bordure);
     border-radius: 12px;
@@ -1590,7 +1592,8 @@
     .page-hero .hero-sub { max-width: 480px; }
 
     .products-grid { grid-template-columns: 1fr 1fr; max-width: 720px; }
-    .windows-grid { grid-template-columns: repeat(3, 1fr); max-width: 620px; }
+    .windows-grid { max-width: 620px; }
+    .window-item { flex-basis: calc(33.333% - 9px); }
     .gallery-grid { max-width: 600px; }
     .process-grid { flex-direction: row; max-width: 660px; }
     .process-step { flex: 1; }
@@ -1624,7 +1627,8 @@
     .products-grid { grid-template-columns: repeat(4, 1fr); max-width: 1160px; gap: 20px; }
     .card-image { height: 150px; }
 
-    .windows-grid { grid-template-columns: repeat(5, 1fr); max-width: 900px; }
+    .windows-grid { max-width: 900px; }
+    .window-item { flex-basis: calc(20% - 16px); }
 
     .process-card { max-width: 900px; padding: 44px 50px; }
     .process-grid {
@@ -1776,3 +1780,17 @@
   @media (min-width: 1024px) {
     .search-overlay { padding-top: 100px; }
   }
+
+  /* ── CTA AVIS GOOGLE ── */
+  .google-review-cta {
+    max-width: 480px;
+    margin: 0 auto 24px;
+    background: linear-gradient(135deg, var(--vert-pale) 0%, #eef6ec 100%);
+    border: 1.5px solid var(--vert-pale);
+    border-radius: 16px;
+    padding: 26px 22px;
+    text-align: center;
+  }
+  .grc-icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .google-review-cta h3 { font-family: var(--font-display); color: var(--anthracite); font-size: 1.1rem; margin-bottom: 6px; }
+  .google-review-cta p { color: var(--gris-moyen); font-size: 0.87rem; margin-bottom: 16px; }
