@@ -162,36 +162,6 @@
   </div>
 </section>
 
-<!-- GALERIE PHOTOS -->
-<section class="section">
-  <div class="section-header">
-    <span class="section-label">En situation</span>
-    <h2>Mes moustiquaires en photos</h2>
-    <p>Pose sans perçage, système magnétique, cadre aluminium renforcé.</p>
-  </div>
-
-  <div class="photo-hero">
-    <img onclick="openLightbox(this.src)" class="zoomable" src="assets/img/installation-fenetre.jpg" alt="Installation d'une moustiquaire MoustiKO sur une fenêtre">
-    <div class="photo-hero-caption">Installation sans perçage — disponible en noir ou blanc</div>
-  </div>
-
-  <div class="gallery-grid">
-    <div class="gallery-card">
-      <div class="gallery-visual">
-        <img onclick="openLightbox(this.src)" class="zoomable" src="assets/img/moustiquaire-cadre-blanc.jpg" alt="Moustiquaire cadre blanc">
-      </div>
-      <div class="gallery-caption">Finition blanche<span class="gc-sub">Discrète, s'intègre partout</span></div>
-    </div>
-    <div class="gallery-card">
-      <div class="gallery-visual">
-        <img onclick="openLightbox(this.src)" class="zoomable" src="assets/img/moustiquaire-cadre-noir.jpg" alt="Moustiquaire cadre noir">
-      </div>
-      <div class="gallery-caption">Finition noire<span class="gc-sub">Idéale sur menuiserie claire</span></div>
-    </div>
-  </div>
-
-</section>
-
 <!-- CONFIGURATEUR -->
 <section class="section" id="tarifs">
   <div class="section-header">
@@ -313,13 +283,23 @@
     <p>Une entreprise toute neuve — les premiers avis arrivent bientôt !</p>
   </div>
 
+  <div class="google-review-cta">
+    <div class="grc-icon">⭐</div>
+    <h3>Vous êtes client MoustiKO ?</h3>
+    <p>Le plus utile pour moi : un avis Google. Ça prend 30 secondes, sans créer de compte sur ce site.</p>
+    <a href="https://www.google.com/search?q=MoustiKO+moustiquaires+Haute-Savoie+avis" target="_blank" rel="noopener" class="btn-primary">🔎 Laisser un avis Google</a>
+  </div>
+
   <div id="avis-container">
-    <div class="loading-placeholder">Chargement des avis…</div>
+    <div class="avis-empty">
+      <div class="ae-icon">🦟</div>
+      <p>Aucun avis pour l'instant — MoustiKO est tout neuf.<br>Soyez la première personne à partager votre expérience !</p>
+    </div>
   </div>
 
   <div class="avis-form-card">
-    <h3>Vous êtes client MoustiKO ?</h3>
-    <p>Laissez votre avis, il sera publié directement sur cette page.</p>
+    <h3>Ou laissez un mot ici</h3>
+    <p>Pas envie de passer par Google ? Ce petit mot m'est envoyé directement, sans création de compte.</p>
     <label class="field-label">Votre note</label>
     <div class="star-picker" id="star-picker">
       <button type="button" class="star-btn" data-val="1">★</button>
@@ -334,8 +314,8 @@
     <input type="text" class="full-input" id="avis-commune" placeholder="ex: Annecy (74)">
     <label class="field-label">Votre avis</label>
     <textarea class="full-input" id="avis-comment" placeholder="Rapide, soigné, je recommande…"></textarea>
-    <button class="btn-primary" style="width:100%;" onclick="submitAvis()">Publier mon avis</button>
-    <p class="avis-privacy-note">Votre avis sera visible publiquement par tous les visiteurs du site.</p>
+    <button class="btn-primary" style="width:100%;" onclick="submitAvis()">Envoyer mon avis</button>
+    <p class="avis-privacy-note">Votre avis m'est envoyé pour relecture avant toute publication sur le site.</p>
   </div>
 </section>
 
@@ -527,53 +507,8 @@
     setTimeout(() => toast.classList.remove('show'), 3000);
   }
 
-  /* ============ AVIS (stockage persistant partage) ============ */
+  /* ============ AVIS (envoi par email pour relecture) ============ */
   const FORMSPREE_URL = 'https://formspree.io/f/mwvdylev';
-  let reviews = [];
-
-  function timeAgoLabel(dateStr) {
-    return dateStr;
-  }
-
-  function renderAvis() {
-    const container = document.getElementById('avis-container');
-    if (!reviews.length) {
-      container.innerHTML = `
-        <div class="avis-empty">
-          <div class="ae-icon">🦟</div>
-          <p>Aucun avis pour l'instant — MoustiKO est tout neuf.<br>Soyez la première personne à partager votre expérience !</p>
-        </div>
-      `;
-      return;
-    }
-    const list = document.createElement('div');
-    list.className = 'avis-list';
-    list.innerHTML = reviews.slice().reverse().map(r => {
-      const initials = (r.name || '?').trim().split(' ').map(p=>p[0]).join('').slice(0,2).toUpperCase();
-      const stars = '★'.repeat(r.rating) + '☆'.repeat(5-r.rating);
-      return `
-        <div class="avis-card">
-          <div class="avis-stars">${stars}</div>
-          <div class="avis-text">${escapeHtml(r.comment)}</div>
-          <div class="avis-author">
-            <div class="avis-avatar">${initials}</div>
-            <div class="avis-info">
-              <h5>${escapeHtml(r.name)}</h5>
-              <p>${escapeHtml(r.commune)} · ${r.date}</p>
-            </div>
-          </div>
-        </div>
-      `;
-    }).join('');
-    container.innerHTML = '';
-    container.appendChild(list);
-  }
-
-  function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str || '';
-    return div.innerHTML;
-  }
 
   let selectedRating = 0;
   document.querySelectorAll('.star-btn').forEach(btn => {
@@ -593,18 +528,6 @@
       showToast('⚠️ Remplissez tous les champs et choisissez une note');
       return;
     }
-    const newReview = {
-      id: Date.now(),
-      name, commune, comment,
-      rating: selectedRating,
-      date: new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'short', year:'numeric' })
-    };
-    reviews.push(newReview);
-    try {
-      await window.storage.set('moustiko_reviews', JSON.stringify(reviews), true);
-    } catch(e) { console.error('Erreur stockage avis', e); }
-
-    // envoyer l'avis par email via Formspree
     try {
       await fetch(FORMSPREE_URL, {
         method: 'POST',
@@ -620,13 +543,12 @@
       });
     } catch(e) { console.error('Erreur envoi Formspree avis', e); }
 
-    renderAvis();
     document.getElementById('avis-nom').value = '';
     document.getElementById('avis-commune').value = '';
     document.getElementById('avis-comment').value = '';
     selectedRating = 0;
     document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('active'));
-    showToast('✓ Merci pour votre avis !');
+    showToast('✓ Merci, votre avis m\'a été envoyé !');
   }
 
   /* ============ SCROLL REVEAL ============ */
@@ -680,12 +602,6 @@
   async function init() {
     setupScrollReveal();
     initCookieBanner();
-
-    try {
-      const res = await window.storage.get('moustiko_reviews', true);
-      reviews = res && res.value ? JSON.parse(res.value) : [];
-    } catch(e) { reviews = []; }
-    renderAvis();
   }
 
   init();
