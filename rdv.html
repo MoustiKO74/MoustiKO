@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Prenez rendez-vous avec MoustiKO pour la pose de vos moustiquaires en Haute-Savoie. Vendredi, samedi et dimanche, sans perçage, à partir de 45€.">
+  <meta name="description" content="Prenez rendez-vous avec MoustiKO pour la pose de vos moustiquaires en Haute-Savoie. Samedi et dimanche, sans perçage, à partir de 45€.">
   <meta property="og:site_name" content="MoustiKO">
   <title>Prendre rendez-vous — MoustiKO</title>
   <link rel="icon" href="favicon.ico">
@@ -181,11 +181,10 @@
   const DAY_ABBR = ['dim','lun','mar','mer','jeu','ven','sam'];
   const MONTH_NAMES = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
 
-  // Vendredi : à partir de 17h, 1h d'écart. Samedi/Dimanche : journée classique.
+  // Samedi : 8h-12h. Dimanche : 8h-12h puis 13h30-19h (coupure méridienne).
   const SLOTS_BY_DAY = {
-    5: ['17h00','18h00','19h00','20h00'],                          // vendredi
-    6: ['8h30','9h30','10h30','11h30','13h30','14h30','15h30','16h30'], // samedi
-    0: ['8h30','9h30','10h30','11h30','13h30','14h30','15h30','16h30']  // dimanche
+    6: ['8h00','9h00','10h00','11h00','12h00'],                                                    // samedi
+    0: ['8h00','9h00','10h00','11h00','12h00','13h30','14h30','15h30','16h30','17h30','18h30','19h00'] // dimanche
   };
 
   function pad2(n){ return n<10 ? '0'+n : ''+n; }
@@ -204,18 +203,18 @@
     start.setDate(start.getDate() + 1);
     start.setHours(0,0,0,0);
 
-    // ne garder que vendredi (5), samedi (6), dimanche (0)
+    // ne garder que samedi (6) et dimanche (0)
     let raw = [];
     for (let i=0; i<60 && raw.length<24; i++) {
       const d = new Date(start);
       d.setDate(start.getDate() + i);
-      if ([0,5,6].includes(d.getDay())) raw.push(d);
+      if ([0,6].includes(d.getDay())) raw.push(d);
     }
 
-    // grouper par blocs de 3 (ven-sam-dim) pour repartir les creneaux "pris"
+    // grouper par blocs de 2 (sam-dim) pour repartir les creneaux "pris"
     calendarDays = [];
-    for (let wStart = 0; wStart < raw.length; wStart += 3) {
-      const weekChunk = raw.slice(wStart, wStart + 3);
+    for (let wStart = 0; wStart < raw.length; wStart += 2) {
+      const weekChunk = raw.slice(wStart, wStart + 2);
       let weekSlots = [];
       weekChunk.forEach(d => {
         const key = dateKey(d);
@@ -268,8 +267,8 @@
     });
     if (blockDays.length) blocks.push(blockDays);
 
-    // vendredi=0, samedi=1, dimanche=2
-    const COL_MAP = { 5: 0, 6: 1, 0: 2 };
+    // samedi=0, dimanche=1
+    const COL_MAP = { 6: 0, 0: 1 };
 
     blocks.forEach(block => {
       const first = block[0];
@@ -281,7 +280,7 @@
       let lastCol = colIndex;
       block.forEach(day => {
         const col = COL_MAP[day.dateObj.getDay()];
-        // combler les trous entre jours (ex: si un vendredi manque)
+        // combler les trous entre jours (ex: si un samedi manque)
         for (let i=lastCol+1; i<col; i++) cellsHtml += '<div class="day-cell empty"></div>';
         lastCol = col;
 
@@ -293,7 +292,7 @@
         }
       });
 
-      html += `<div class="month-block"><div class="month-header">${monthLabel}</div><div class="days-grid days-grid-3">${cellsHtml}</div></div>`;
+      html += `<div class="month-block"><div class="month-header">${monthLabel}</div><div class="days-grid days-grid-2">${cellsHtml}</div></div>`;
     });
 
     wrap.innerHTML = html;
