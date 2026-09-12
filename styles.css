@@ -964,6 +964,10 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .days-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .day-cell {
     border: 1.5px solid var(--bordure);
     border-radius: 8px;
