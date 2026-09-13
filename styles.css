@@ -1619,7 +1619,7 @@
     .hero-content { max-width: 1180px; margin: 0 auto; text-align: left; padding: 0 40px; }
     .hero h1 { font-size: 3.1rem; max-width: 640px; margin-left: 0; margin-right: 0; }
     .hero-sub { max-width: 480px; font-size: 1.1rem; margin-left: 0; margin-right: 0; }
-    .hero-btns { justify-content: flex-start; }
+    .hero .hero-btns { justify-content: flex-start; }
 
     .page-hero { min-height: 38vh; }
     .page-hero h1 { font-size: 2.35rem; max-width: 700px; }
@@ -1677,19 +1677,40 @@
     line-height: 1.65;
   }
 
-  .product-intro .intro-more { display: none; }
-  .product-intro.expanded .intro-more { display: inline; }
+  .product-intro .intro-clip {
+    position: relative;
+    max-height: 2.9em;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .product-intro.expanded .intro-clip {
+    max-height: 400px;
+  }
+
+  .product-intro .intro-clip::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1.5em;
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, var(--blanc) 85%);
+    transition: opacity 0.25s ease;
+  }
+
+  .product-intro.expanded .intro-clip::after { opacity: 0; }
 
   .intro-toggle {
     background: none;
     border: none;
     color: var(--vert-fonce);
-    font-weight: 700;
+    font-weight: 600;
     font-size: 0.85rem;
     cursor: pointer;
     padding: 8px 0 0;
     text-decoration: underline;
     font-family: var(--font-body);
+    position: relative;
+    z-index: 1;
   }
 
   /* ── RECHERCHE ── */
