@@ -296,26 +296,7 @@
     <div class="elfsight-app-1c991f76-b599-4c4e-8e0c-91871ad1d2ae" data-elfsight-app-lazy></div>
   </div>
 
-  <div class="avis-form-card">
-    <h3>Ou laissez un mot ici</h3>
-    <p>Pas envie de passer par Google ? Ce petit mot m'est envoyé directement, sans création de compte.</p>
-    <label class="field-label">Votre note</label>
-    <div class="star-picker" id="star-picker">
-      <button type="button" class="star-btn" data-val="1">★</button>
-      <button type="button" class="star-btn" data-val="2">★</button>
-      <button type="button" class="star-btn" data-val="3">★</button>
-      <button type="button" class="star-btn" data-val="4">★</button>
-      <button type="button" class="star-btn" data-val="5">★</button>
-    </div>
-    <label class="field-label">Votre prénom</label>
-    <input type="text" class="full-input" id="avis-nom" placeholder="ex: Camille D.">
-    <label class="field-label">Votre commune</label>
-    <input type="text" class="full-input" id="avis-commune" placeholder="ex: Annecy (74)">
-    <label class="field-label">Votre avis</label>
-    <textarea class="full-input" id="avis-comment" placeholder="Rapide, soigné, je recommande…"></textarea>
-    <button class="btn-primary" style="width:100%;" onclick="submitAvis()">Envoyer mon avis</button>
-    <p class="avis-privacy-note">Votre avis m'est envoyé pour relecture avant toute publication sur le site.</p>
-  </div>
+  <p class="avis-alt-link">Vous préférez laisser un mot ici plutôt que sur Google ? <a href="avis.html">Cliquez ici →</a></p>
 </section>
 
 <!-- CONTACT -->
@@ -506,49 +487,6 @@
     setTimeout(() => toast.classList.remove('show'), 3000);
   }
 
-  /* ============ AVIS (envoi par email pour relecture) ============ */
-  const FORMSPREE_URL = 'https://formspree.io/f/mwvdylev';
-
-  let selectedRating = 0;
-  document.querySelectorAll('.star-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      selectedRating = parseInt(btn.dataset.val);
-      document.querySelectorAll('.star-btn').forEach(b => {
-        b.classList.toggle('active', parseInt(b.dataset.val) <= selectedRating);
-      });
-    });
-  });
-
-  async function submitAvis() {
-    const name = document.getElementById('avis-nom').value.trim();
-    const commune = document.getElementById('avis-commune').value.trim();
-    const comment = document.getElementById('avis-comment').value.trim();
-    if (!name || !commune || !comment || selectedRating === 0) {
-      showToast('⚠️ Remplissez tous les champs et choisissez une note');
-      return;
-    }
-    try {
-      await fetch(FORMSPREE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          _subject: 'Nouvel avis MoustiKO — ' + name,
-          type: 'Nouvel avis client',
-          nom: name,
-          commune: commune,
-          note: selectedRating + '/5',
-          avis: comment
-        })
-      });
-    } catch(e) { console.error('Erreur envoi Formspree avis', e); }
-
-    document.getElementById('avis-nom').value = '';
-    document.getElementById('avis-commune').value = '';
-    document.getElementById('avis-comment').value = '';
-    selectedRating = 0;
-    document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('active'));
-    showToast('✓ Merci, votre avis m\'a été envoyé !');
-  }
 
   /* ============ SCROLL REVEAL ============ */
   function setupScrollReveal() {
