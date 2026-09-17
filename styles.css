@@ -1819,3 +1819,9 @@
   .grc-icon { font-size: 1.8rem; margin-bottom: 8px; }
   .google-review-cta h3 { font-family: var(--font-display); color: var(--anthracite); font-size: 1.1rem; margin-bottom: 6px; }
   .google-review-cta p { color: var(--gris-moyen); font-size: 0.87rem; margin-bottom: 16px; }
+
+  .tarif-reveal { display:none; margin-top:14px; }
+  .tarif-reveal.open { display:block; }
+
+  .avis-alt-link { text-align:center; color:var(--gris-moyen); font-size:0.85rem; margin-top:18px; }
+  .avis-alt-link a { color:var(--vert-fonce); font-weight:700; text-decoration:underline; }
