@@ -105,3 +105,9 @@ function filterSearch() {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeSearch();
 });
+
+function toggleTarif(btn) {
+  const box = document.getElementById('tarif-reveal');
+  const open = box.classList.toggle('open');
+  btn.textContent = open ? 'Masquer les tarifs' : 'Voir les tarifs →';
+}
