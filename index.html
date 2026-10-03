@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://moustiko74.fr/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MoustiKO — Moustiquaires sur mesure en Haute-Savoie (74). Intervention à domicile le week-end (samedi et dimanche). Pose le jour-même, sans perçage, à partir de 45€.">
+  <meta property="og:site_name" content="MoustiKO">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "WebSite",
+    "name": "MoustiKO",
+    "url": "https://moustiko74.github.io/MoustiKO/"
+  }
+  </script>
+  <title>MoustiKO — Moustiquaires sur mesure en Haute-Savoie</title>
+   <link rel="icon" href="favicon.ico">
+   <link rel="apple-touch-icon" href="favicon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+  <script src="https://elfsightcdn.com/platform.js" async></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/img/logo.png" alt="MoustiKO">
+    <span class="nav-logo-text">Mousti<span>KO</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#services">Nos produits</a>
+    <a href="index.html#tarifs">Tarifs</a>
+    <a href="index.html#avis" onclick="revealAvis(event)">Avis</a>
+  </div>
+  <button class="nav-search-btn" onclick="toggleSearch()" aria-label="Rechercher">🔍</button>
+  <a href="rdv.html" class="nav-cta">Prendre RDV</a>
+</nav>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" oninput="filterSearch()" placeholder="fenêtre, porte, baie vitrée, velux..." autocomplete="off">
+    <button class="search-close" onclick="closeSearch()" aria-label="Fermer la recherche">✕</button>
+  </div>
+  <div class="search-results" id="search-results"></div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-media">
+    <img class="hero-bg-img" src="assets/img/hero-bg.jpg" alt="Moustiquaire MoustiKO posée sur une fenêtre de chambre" fetchpriority="high">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ Depuis 2026</div>
+    <h1>Fini les moustiques,<br><span>sans perçage ni tracas</span></h1>
+    <p class="hero-sub">Je me déplace chez vous, je mesure, je découpe et je pose vos moustiquaires le jour-même.</p>
+    <div class="hero-btns">
+      <a href="rdv.html" class="btn-primary">Prendre rendez-vous</a>
+      <a href="#tarifs" class="btn-secondary">Voir les tarifs</a>
+    </div>
+  </div>
+</section>
+
+<!-- COMMENT CA MARCHE (remplace la vidéo) -->
+<section class="process-section">
+  <div class="process-card">
+  <div class="process-header">
+    <span class="section-label">Comment ça marche</span>
+    <h2>Trois étapes, un après-midi</h2>
+  </div>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="process-num">1</div>
+      <div class="process-content">
+        <h4>Je mesure chez vous</h4>
+        <p>Prise de rendez-vous en ligne, je passe à votre domicile et je relève les dimensions exactes de chaque fenêtre.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-num">2</div>
+      <div class="process-content">
+        <h4>Je découpe sur mesure</h4>
+        <p>Cadre aluminium et toile ajustés au centimètre près, en noir ou blanc selon votre choix.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-num">3</div>
+      <div class="process-content">
+        <h4>Je pose, vous réglez en espèces</h4>
+        <p>Installation le jour-même, sans perçage. Vous payez une fois la pose terminée et validée.</p>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section section-alt" id="services">
+  <div class="section-header">
+    <span class="section-label">Ce que je fais</span>
+    <h2>Mes services</h2>
+    <p>Je me concentre sur ce que je fais le mieux. La suite arrive vite.</p>
+  </div>
+
+  <div class="products-grid">
+
+    <a href="fenetre.html" class="product-card">
+      <div class="card-image">
+        <img src="assets/img/produit-fenetre.jpg" alt="Moustiquaire de fenêtre">
+        <div class="badge-new">✓ Disponible</div>
+      </div>
+      <div class="card-body">
+        <h3>Moustiquaire de fenêtre</h3>
+        <p>Sur mesure pour toutes les fenêtres standard. Cadre aluminium, toile maille fine. Noir ou blanc.</p>
+        <span class="card-cta">Découvrir <span class="arrow">→</span></span>
+      </div>
+    </a>
+
+    <a href="porte.html" class="product-card coming-soon">
+      <div class="card-image">
+        <img src="assets/img/produit-porte.jpg" alt="Moustiquaire de porte">
+        <div class="badge-soon">Bientôt</div>
+      </div>
+      <div class="card-body">
+        <h3>Moustiquaire de porte</h3>
+        <p>Porte d'entrée, porte-fenêtre, terrasse. Système enrouleur ou fixe selon vos besoins.</p>
+        <div class="card-date">📅 Lancement prévu cet été 2026</div>
+        <span class="card-cta">Découvrir <span class="arrow">→</span></span>
+      </div>
+    </a>
+
+    <a href="baie-vitree.html" class="product-card coming-soon">
+      <div class="card-image">
+        <img src="assets/img/produit-baie-vitree.jpg" alt="Moustiquaire baie vitrée">
+        <div class="badge-soon">Bientôt</div>
+      </div>
+      <div class="card-body">
+        <h3>Moustiquaire baie vitrée</h3>
+        <p>Pour les grandes baies vitrées coulissantes. Système plissé ou enrouleur latéral.</p>
+        <div class="card-date">📅 Lancement prévu cet été 2026</div>
+        <span class="card-cta">Découvrir <span class="arrow">→</span></span>
+      </div>
+    </a>
+
+    <a href="velux.html" class="product-card coming-soon">
+      <div class="card-image">
+        <img src="assets/img/produit-velux.jpg" alt="Moustiquaire Velux">
+        <div class="badge-soon">Bientôt</div>
+      </div>
+      <div class="card-body">
+        <h3>Moustiquaire Velux</h3>
+        <p>Adaptation spéciale pour fenêtres de toit, compatible avec la plupart des modèles Velux.</p>
+        <div class="card-date">📅 Lancement prévu cet été 2026</div>
+        <span class="card-cta">Découvrir <span class="arrow">→</span></span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- CONFIGURATEUR -->
+<section class="section" id="tarifs">
+  <div class="section-header">
+    <span class="section-label">Calculez votre devis</span>
+    <h2>Combien ça coûte ?</h2>
+    <p>Entrez vos dimensions et choisissez votre couleur. Résultat instantané.</p>
+  </div>
+
+  <div class="material-picker">
+    <div class="mat-option selected-mat" onclick="selectMaterial('noir', this)">
+      <div class="mat-swatch noir"></div>
+      <span>Noir</span>
+    </div>
+    <div class="mat-option" onclick="selectMaterial('blanc', this)">
+      <div class="mat-swatch blanc"></div>
+      <span>Blanc</span>
+    </div>
+  </div>
+
+  <p style="text-align:center;font-size:0.76rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gris-moyen);margin-bottom:12px;">Formats courants</p>
+  <div class="windows-grid" style="margin-bottom:8px;">
+    <div class="window-item" onclick="selectPreset(60, 90, this)">
+      <div class="window-drawing">
+        <svg width="40" height="55" viewBox="0 0 40 55">
+          <rect x="2" y="2" width="36" height="51" rx="2" fill="none" stroke="#84954a" stroke-width="2"/>
+          <line x1="20" y1="2" x2="20" y2="53" stroke="#ccc" stroke-width="1"/>
+          <line x1="2" y1="27" x2="38" y2="27" stroke="#ccc" stroke-width="1"/>
+        </svg>
+      </div>
+      <h4>Fenêtre standard</h4>
+      <div class="dims">60 × 90 cm</div>
+      <div class="price">45 €</div>
+    </div>
+    <div class="window-item" onclick="selectPreset(80, 100, this)">
+      <div class="window-drawing">
+        <svg width="48" height="55" viewBox="0 0 48 55">
+          <rect x="2" y="2" width="44" height="51" rx="2" fill="none" stroke="#84954a" stroke-width="2"/>
+          <line x1="24" y1="2" x2="24" y2="53" stroke="#ccc" stroke-width="1"/>
+          <line x1="2" y1="27" x2="46" y2="27" stroke="#ccc" stroke-width="1"/>
+        </svg>
+      </div>
+      <h4>Fenêtre large</h4>
+      <div class="dims">80 × 100 cm</div>
+      <div class="price">45 €</div>
+    </div>
+    <div class="window-item" onclick="selectPreset(120, 100, this)">
+      <div class="window-drawing">
+        <svg width="55" height="45" viewBox="0 0 55 45">
+          <rect x="2" y="2" width="51" height="41" rx="2" fill="none" stroke="#84954a" stroke-width="2"/>
+          <line x1="27" y1="2" x2="27" y2="43" stroke="#ccc" stroke-width="1"/>
+          <line x1="2" y1="22" x2="53" y2="22" stroke="#ccc" stroke-width="1"/>
+        </svg>
+      </div>
+      <h4>Fenêtre panoramique</h4>
+      <div class="dims">120 × 100 cm</div>
+      <div class="price">90 €</div>
+    </div>
+    <div class="window-item" onclick="selectPreset(50, 60, this)">
+      <div class="window-drawing">
+        <svg width="35" height="40" viewBox="0 0 35 40">
+          <rect x="2" y="2" width="31" height="36" rx="2" fill="none" stroke="#84954a" stroke-width="2"/>
+          <line x1="17" y1="2" x2="17" y2="38" stroke="#ccc" stroke-width="1"/>
+          <line x1="2" y1="20" x2="33" y2="20" stroke="#ccc" stroke-width="1"/>
+        </svg>
+      </div>
+      <h4>Petite fenêtre</h4>
+      <div class="dims">50 × 60 cm</div>
+      <div class="price">45 €</div>
+    </div>
+  </div>
+
+  <div class="configurator">
+    <div class="config-title">➕ Ajouter une fenêtre personnalisée</div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Largeur (cm)</label>
+        <input type="number" id="width" placeholder="ex: 65" min="20" max="300">
+      </div>
+      <div class="form-group">
+        <label>Hauteur (cm)</label>
+        <input type="number" id="height" placeholder="ex: 90" min="20" max="300">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Quantité</label>
+        <input type="number" id="qty" value="1" min="1" max="20">
+      </div>
+      <div class="form-group">
+        <label>Nom / pièce</label>
+        <input type="text" id="room" placeholder="Chambre, salon…">
+      </div>
+    </div>
+
+    <div class="price-preview">
+      <div class="price-preview-label">Estimation</div>
+      <div class="price-preview-amount" id="price-preview">45 €</div>
+    </div>
+
+    <div class="windows-list" id="windows-list"></div>
+
+    <button class="add-window-btn" onclick="addWindow()">+ Ajouter cette fenêtre à ma liste</button>
+
+    <div class="total-bar" id="total-bar" style="display:none">
+      <span>Total estimé</span>
+      <strong id="total-amount">0 €</strong>
+    </div>
+
+    <a href="rdv.html" class="btn-primary" style="display:block;text-align:center;margin-top:16px;padding:15px;">Finaliser ma commande — Prendre rendez-vous →</a>
+  </div>
+</section>
+
+<!-- AVIS -->
+<section class="section" id="avis">
+  <div class="section-header">
+    <span class="section-label">Avis clients</span>
+    <h2>Ce qu'en pensent mes clients</h2>
+    <p>Une entreprise toute neuve — les premiers avis arrivent bientôt !</p>
+  </div>
+
+  <div class="google-review-cta">
+    <div class="grc-icon">⭐</div>
+    <h3>Vous êtes client MoustiKO ?</h3>
+    <p>Le plus utile pour moi : un avis Google. Ça prend 30 secondes, sans créer de compte sur ce site.</p>
+    <a href="https://g.page/r/CV-AxGSiEaj2EBM/review" target="_blank" rel="noopener" class="btn-primary">⭐ Laisser un avis Google</a>
+  </div>
+
+  <div id="avis-container">
+    <!-- Elfsight Google Reviews | Untitled Google Reviews -->
+    <div class="elfsight-app-1c991f76-b599-4c4e-8e0c-91871ad1d2ae" data-elfsight-app-lazy></div>
+  </div>
+
+  <p class="avis-alt-link">Vous préférez laisser un mot ici plutôt que sur Google ? <a href="avis.html">Cliquez ici →</a></p>
+</section>
+
+<!-- CONTACT -->
+<section class="section section-alt">
+  <div class="contact-section">
+    <span class="section-label">On en parle</span>
+    <h2>Une question ?<br>Je réponds vite.</h2>
+    <p>Haute-Savoie (74) uniquement.<br>Samedi 8h-12h, dimanche 8h-12h et 13h30-19h.</p>
+    <a href="tel:+33761559872" class="btn-primary" style="display:block;text-align:center;margin-bottom:12px;padding:16px;">📞 Appeler MoustiKO</a>
+    <a href="sms:+33761559872" class="btn-secondary" style="display:block;text-align:center;padding:16px;">💬 Envoyer un SMS</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-wordmark">Mousti<span>KO</span></div>
+  <div class="footer-tagline">Moustiquaires sur mesure</div>
+  <div class="footer-since">✦ Depuis 2026</div>
+  <p class="footer-region">Haute-Savoie (74) — Intervention à domicile</p>
+  <div class="footer-links">
+    <a href="#avis" onclick="revealAvis(event)">Donner / voir les avis</a>
+    <a href="#services">Services</a>
+    <a href="#tarifs">Tarifs</a>
+    <a href="rdv.html">Rendez-vous</a>
+  </div>
+  <div class="footer-bottom">© 2026 MoustiKO · Tous droits réservés</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<div class="lightbox-overlay" id="lightbox-overlay" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="Aperçu agrandi">
+</div>
+
+<div class="cookie-banner" id="cookie-banner">
+  <h4>🍪 Cookies</h4>
+  <p>Ce site utilise des cookies et technologies similaires pour vous garantir la meilleure expérience de navigation, mesurer l'audience et améliorer nos services. Vous pouvez accepter, refuser ou personnaliser vos préférences à tout moment.</p>
+  <div class="cookie-details" id="cookie-details">En réalité, MoustiKO n'utilise aucun cookie ni traceur — ce bandeau est affiché uniquement à titre visuel, pour illustrer à quoi ressemblerait un vrai bandeau de consentement.</div>
+  <div class="cookie-btns">
+    <button class="cookie-btn-refuse" onclick="handleCookie()">Refuser</button>
+    <button class="cookie-btn-more" onclick="toggleCookieDetails()">Plus d'options</button>
+    <button class="cookie-btn-accept" onclick="handleCookie()">Accepter</button>
+  </div>
+</div>
+
+<script>
+  /* ============ RECHERCHE ============ */
+  const SEARCH_ITEMS = [
+    { label: 'Moustiquaire de fenêtre', url: 'fenetre.html', keywords: 'fenetre fenêtre window disponible' },
+    { label: 'Moustiquaire de porte', url: 'porte.html', keywords: 'porte door entree entrée' },
+    { label: 'Moustiquaire baie vitrée', url: 'baie-vitree.html', keywords: 'baie vitree vitrée coulissante' },
+    { label: 'Moustiquaire Velux', url: 'velux.html', keywords: 'velux toit fenetre de toit' },
+    { label: 'Prendre rendez-vous', url: 'rdv.html', keywords: 'rdv rendez vous rendezvous reservation' },
+    { label: 'Tarifs & configurateur', url: 'index.html#tarifs', keywords: 'tarif prix devis configurateur' },
+    { label: 'Avis clients', url: 'index.html#avis', keywords: 'avis review commentaire' },
+  ];
+  
+  function toggleSearch() {
+    const overlay = document.getElementById('search-overlay');
+    overlay.classList.toggle('open');
+    if (overlay.classList.contains('open')) {
+      renderSearchResults('');
+      const input = document.getElementById('search-input');
+      input.value = '';
+      setTimeout(() => input.focus(), 50);
+    }
+  }
+  function closeSearch() {
+    document.getElementById('search-overlay').classList.remove('open');
+  }
+  function renderSearchResults(query) {
+    const q = query.trim().toLowerCase();
+    const list = document.getElementById('search-results');
+    const filtered = SEARCH_ITEMS.filter(it => !q || it.label.toLowerCase().includes(q) || it.keywords.includes(q));
+    list.innerHTML = filtered.length
+      ? filtered.map(it => '<a class="search-result" href="' + it.url + '">' + it.label + '</a>').join('')
+      : '<p class="search-empty">Aucun résultat</p>';
+  }
+  function filterSearch() {
+    renderSearchResults(document.getElementById('search-input').value);
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeSearch();
+  });
+
+  /* ============ MATERIAUX ============ */
+  let selectedMaterial = 'noir';
+  function selectMaterial(mat, el) {
+    selectedMaterial = mat;
+    document.querySelectorAll('.mat-option').forEach(e => e.classList.remove('selected-mat'));
+    el.classList.add('selected-mat');
+    updatePricePreview();
+  }
+
+  /* ============ PRIX ============ */
+  const UNIT_PRICE = 45;
+
+  function calcUnits(w, h) {
+    const area = (w / 100) * (h / 100);
+    return Math.max(1, Math.ceil(area / 1.0));
+  }
+  function calcPrice(w, h, qty) {
+    return calcUnits(w, h) * qty * UNIT_PRICE;
+  }
+  function updatePricePreview() {
+    const w = parseInt(document.getElementById('width').value) || 60;
+    const h = parseInt(document.getElementById('height').value) || 90;
+    const qty = parseInt(document.getElementById('qty').value) || 1;
+    document.getElementById('price-preview').textContent = calcPrice(w, h, qty) + ' €';
+  }
+  document.getElementById('width').addEventListener('input', updatePricePreview);
+  document.getElementById('height').addEventListener('input', updatePricePreview);
+  document.getElementById('qty').addEventListener('input', updatePricePreview);
+
+  function selectPreset(w, h, el) {
+    document.querySelectorAll('.window-item').forEach(e => e.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('width').value = w;
+    document.getElementById('height').value = h;
+    document.getElementById('qty').value = 1;
+    updatePricePreview();
+  }
+
+  let windows = [];
+  function addWindow() {
+    const w = parseInt(document.getElementById('width').value);
+    const h = parseInt(document.getElementById('height').value);
+    const qty = parseInt(document.getElementById('qty').value) || 1;
+    const room = document.getElementById('room').value || 'Fenêtre';
+    if (!w || !h || w < 20 || h < 20) { showToast('⚠️ Entrez des dimensions valides'); return; }
+    const price = calcPrice(w, h, qty);
+    windows.push({ w, h, qty, room, price, material: selectedMaterial });
+    renderWindowsList();
+    document.getElementById('room').value = '';
+    showToast('✓ Fenêtre ajoutée à votre liste');
+    persistWindows();
+  }
+  function removeWindow(i) {
+    windows.splice(i, 1);
+    renderWindowsList();
+    persistWindows();
+  }
+  function renderWindowsList() {
+    const list = document.getElementById('windows-list');
+    const totalBar = document.getElementById('total-bar');
+    list.innerHTML = windows.map((w, i) => `
+      <div class="window-entry">
+        <div class="we-info">${w.room} — ${w.w}×${w.h}cm × ${w.qty} (${w.material})</div>
+        <div class="we-price">${w.price} €</div>
+        <button class="we-del" onclick="removeWindow(${i})">✕</button>
+      </div>
+    `).join('');
+    if (windows.length > 0) {
+      const total = windows.reduce((s, w) => s + w.price, 0);
+      document.getElementById('total-amount').textContent = total + ' €';
+      totalBar.style.display = 'flex';
+    } else {
+      totalBar.style.display = 'none';
+    }
+  }
+
+  function persistWindows() {
+    try { localStorage.setItem('moustiko_windows', JSON.stringify(windows)); } catch(e) {}
+  }
+
+  /* ============ TOAST ============ */
+  /* ============ LIGHTBOX ============ */
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox-overlay').classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox-overlay').classList.remove('open');
+  }
+
+  /* ============ REVEAL AVIS ============ */
+  function revealAvis(e) {
+    if (e) e.preventDefault();
+    const el = document.getElementById('avis');
+    el.classList.add('open');
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }
+
+
+  /* ============ SCROLL REVEAL ============ */
+  function setupScrollReveal() {
+    document.querySelectorAll('.section-header, .hero-logo, .about-card, .source-card, .payment-card, .estimate-box, .photo-hero, .photo-detail-card')
+      .forEach(el => el.classList.add('reveal'));
+
+    document.querySelectorAll('.why-list, .process-grid, .products-grid, .gallery-grid, .windows-grid')
+      .forEach(el => el.classList.add('reveal-stagger'));
+
+    document.querySelectorAll('.configurator, .wizard-wrap, .avis-form-card')
+      .forEach(el => el.classList.add('reveal-scale'));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal, .reveal-stagger, .reveal-scale')
+      .forEach(el => observer.observe(el));
+  }
+
+  /* ============ SCROLL TOP AU RAFRAICHISSEMENT ============ */
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
+  window.addEventListener('load', () => window.scrollTo(0, 0));
+
+  /* ============ BANDEAU COOKIES ============ */
+  function toggleCookieDetails() {
+    document.getElementById('cookie-details').classList.toggle('visible');
+  }
+  function handleCookie() {
+    document.getElementById('cookie-banner').classList.remove('visible');
+    try { localStorage.setItem('moustiko_cookie_seen', '1'); } catch(e) {}
+  }
+  function initCookieBanner() {
+    let seen = false;
+    try { seen = localStorage.getItem('moustiko_cookie_seen') === '1'; } catch(e) {}
+    if (!seen) {
+      setTimeout(() => document.getElementById('cookie-banner').classList.add('visible'), 600);
+    }
+  }
+
+  /* ============ INIT ============ */
+  async function init() {
+    setupScrollReveal();
+    initCookieBanner();
+  }
+
+  init();
+</script>
+</body>
+</html>
