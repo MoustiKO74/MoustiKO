@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://moustiko74.fr/avis.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Laissez votre avis sur MoustiKO, installateur de moustiquaires en Haute-Savoie. Votre avis m'aide à faire connaître mon travail.">
+  <meta property="og:site_name" content="MoustiKO">
+  <title>Donner mon avis — MoustiKO</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="favicon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/img/logo.png" alt="MoustiKO">
+    <span class="nav-logo-text">Mousti<span>KO</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#services">Nos produits</a>
+    <a href="index.html#tarifs">Tarifs</a>
+    <a href="index.html#avis">Avis</a>
+  </div>
+  <button class="nav-search-btn" onclick="toggleSearch()" aria-label="Rechercher">🔍</button>
+  <a href="rdv.html" class="nav-cta">Prendre RDV</a>
+</nav>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" oninput="filterSearch()" placeholder="fenêtre, porte, baie vitrée, velux..." autocomplete="off">
+    <button class="search-close" onclick="closeSearch()" aria-label="Fermer la recherche">✕</button>
+  </div>
+  <div class="search-results" id="search-results"></div>
+</div>
+<!-- PAGE HERO -->
+<section class="page-hero" style="background:linear-gradient(135deg, var(--anthracite) 0%, #3c4650 100%);">
+  <div class="hero-content">
+    <a href="index.html#avis" class="breadcrumb">← Retour aux avis</a>
+    <h1>Donner mon avis</h1>
+    <p class="hero-sub">Un petit mot sur votre expérience MoustiKO, envoyé directement, sans créer de compte.</p>
+  </div>
+</section>
+
+<section class="page-content">
+  <div class="avis-form-card" style="margin:0 auto;">
+    <h3>Votre avis compte</h3>
+    <p>Pas envie de passer par Google ? Ce petit mot m'est envoyé directement pour relecture.</p>
+    <label class="field-label">Votre note</label>
+    <div class="star-picker" id="star-picker">
+      <button type="button" class="star-btn" data-val="1">★</button>
+      <button type="button" class="star-btn" data-val="2">★</button>
+      <button type="button" class="star-btn" data-val="3">★</button>
+      <button type="button" class="star-btn" data-val="4">★</button>
+      <button type="button" class="star-btn" data-val="5">★</button>
+    </div>
+    <label class="field-label">Votre prénom</label>
+    <input type="text" class="full-input" id="avis-nom" placeholder="ex: Camille D.">
+    <label class="field-label">Votre commune</label>
+    <input type="text" class="full-input" id="avis-commune" placeholder="ex: Annecy (74)">
+    <label class="field-label">Votre avis</label>
+    <textarea class="full-input" id="avis-comment" placeholder="Rapide, soigné, je recommande…"></textarea>
+    <button class="btn-primary" style="width:100%;" onclick="submitAvis()">Envoyer mon avis</button>
+    <p class="avis-privacy-note">Votre avis m'est envoyé pour relecture avant toute publication sur le site.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-wordmark">Mousti<span>KO</span></div>
+  <div class="footer-tagline">Moustiquaires sur mesure</div>
+  <div class="footer-since">✦ Depuis 2026</div>
+  <p class="footer-region">Haute-Savoie (74) — Intervention à domicile</p>
+  <div class="footer-links">
+    <a href="index.html#avis">Donner / voir les avis</a>
+    <a href="index.html#services">Services</a>
+    <a href="index.html#tarifs">Tarifs</a>
+    <a href="rdv.html">Rendez-vous</a>
+  </div>
+  <div class="footer-bottom">© 2026 MoustiKO · Tous droits réservés</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<div class="cookie-banner" id="cookie-banner">
+  <h4>🍪 Cookies</h4>
+  <p>Ce site utilise des cookies et technologies similaires pour vous garantir la meilleure expérience de navigation, mesurer l'audience et améliorer nos services. Vous pouvez accepter, refuser ou personnaliser vos préférences à tout moment.</p>
+  <div class="cookie-details" id="cookie-details">En réalité, MoustiKO n'utilise aucun cookie ni traceur — ce bandeau est affiché uniquement à titre visuel, pour illustrer à quoi ressemblerait un vrai bandeau de consentement.</div>
+  <div class="cookie-btns">
+    <button class="cookie-btn-refuse" onclick="handleCookie()">Refuser</button>
+    <button class="cookie-btn-more" onclick="toggleCookieDetails()">Plus d'options</button>
+    <button class="cookie-btn-accept" onclick="handleCookie()">Accepter</button>
+  </div>
+</div>
+<script src="site.js"></script>
+<script>
+  /* ============ AVIS (envoi par email pour relecture) ============ */
+  const FORMSPREE_URL = 'https://formspree.io/f/mwvdylev';
+
+  let selectedRating = 0;
+  document.querySelectorAll('.star-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedRating = parseInt(btn.dataset.val);
+      document.querySelectorAll('.star-btn').forEach(b => {
+        b.classList.toggle('active', parseInt(b.dataset.val) <= selectedRating);
+      });
+    });
+  });
+
+  async function submitAvis() {
+    const name = document.getElementById('avis-nom').value.trim();
+    const commune = document.getElementById('avis-commune').value.trim();
+    const comment = document.getElementById('avis-comment').value.trim();
+    if (!name || !commune || !comment || selectedRating === 0) {
+      showToast('⚠️ Remplissez tous les champs et choisissez une note');
+      return;
+    }
+    try {
+      await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'Nouvel avis MoustiKO — ' + name,
+          type: 'Nouvel avis client',
+          nom: name,
+          commune: commune,
+          note: selectedRating + '/5',
+          avis: comment
+        })
+      });
+    } catch(e) { console.error('Erreur envoi Formspree avis', e); }
+
+    document.getElementById('avis-nom').value = '';
+    document.getElementById('avis-commune').value = '';
+    document.getElementById('avis-comment').value = '';
+    selectedRating = 0;
+    document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('active'));
+    showToast('✓ Merci, votre avis m\'a été envoyé !');
+  }
+
+</script>
+</body>
+</html>
