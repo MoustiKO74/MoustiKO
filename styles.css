@@ -1514,8 +1514,6 @@
   .lightbox-overlay img { max-width: 100%; max-height: 100%; border-radius: 10px; }
 
   /* ── SECTION AVIS masquee par defaut ── */
-  #avis { display: none; }
-  #avis.open { display: block; }
 
   /* ── BANDEAU COOKIES ── */
   .cookie-banner {
@@ -1825,3 +1823,56 @@
 
   .avis-alt-link { text-align:center; color:var(--gris-moyen); font-size:0.85rem; margin-top:18px; }
   .avis-alt-link a { color:var(--vert-fonce); font-weight:700; text-decoration:underline; }
+
+/* ── PRIX FAÇON APPLE ── */
+.card-price{font-family:var(--font-display);font-size:1.25rem;font-weight:700;color:var(--anthracite);margin-bottom:10px}
+.card-price.soon{font-size:.9rem;font-weight:600;color:var(--gris-moyen)}
+.hero-price{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:#fff;margin:-4px 0 16px}
+.hero-btns .btn-primary,.hero-btns .btn-secondary{display:inline-block;text-align:center}
+.tarifs-cta{display:block;text-align:center;max-width:460px;margin:20px auto 0;padding:15px}
+.custom-details{max-width:480px;margin:16px auto 0}
+.custom-details summary{cursor:pointer;text-align:center;font-weight:600;color:var(--vert-fonce);padding:10px;list-style:none}
+.custom-details summary::-webkit-details-marker{display:none}
+.custom-details[open] summary{margin-bottom:8px}
+
+/* ── AVIS CLIENTS (fin de page) ── */
+.reviews-title{font-family:var(--font-display);font-size:1.7rem;text-align:center;margin-bottom:24px}
+.reviews-wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:20px;align-items:center}
+.reviews-score{text-align:center}
+.reviews-score .rs-note{font-family:var(--font-display);font-size:2.4rem;font-weight:700;line-height:1}
+.reviews-score .rs-note small{font-size:1rem;color:var(--gris-moyen);font-weight:500}
+.reviews-score .rs-stars{color:#e8a62b;font-size:1.2rem;letter-spacing:2px}
+.reviews-score .rs-count{font-size:.8rem;color:var(--gris-moyen)}
+.reviews-carousel{display:flex;align-items:center;gap:6px;width:100%;min-width:0}
+.reviews-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:8px 4px;flex:1;min-width:0}
+.reviews-track::-webkit-scrollbar{display:none}
+.rv-card{flex:0 0 min(270px,78%);scroll-snap-align:start;background:#fff;border-radius:16px;box-shadow:0 4px 18px rgba(0,0,0,.09);padding:16px 18px;display:flex;flex-direction:column;gap:10px;position:relative}
+.rv-card .rv-stars{color:#e8a62b;letter-spacing:2px}
+.rv-card .rv-text{font-size:.86rem;font-style:italic;line-height:1.5;flex:1}
+.rv-card .rv-quote{position:absolute;right:14px;bottom:46px;font-size:3rem;color:#e6e8ea;line-height:1;font-family:Georgia,serif}
+.rv-author{display:flex;align-items:center;gap:10px}
+.rv-avatar{width:34px;height:34px;border-radius:50%;background:var(--vert);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0}
+.rv-author b{font-size:.84rem;display:block}
+.rv-author small{font-size:.7rem;color:var(--gris-moyen)}
+.rv-verified{margin-left:auto;font-size:.62rem;font-weight:700;color:var(--vert-fonce);text-align:right;line-height:1.2}
+.rv-arrow{border:none;background:none;font-size:2rem;color:var(--vert-fonce);cursor:pointer;padding:0 4px}
+.rv-empty{flex:1;text-align:center;background:var(--gris-leger);border-radius:16px;padding:28px 20px;font-size:.9rem;color:var(--gris-moyen)}
+.reviews-cta{text-align:center;margin-top:22px}
+.reviews-cta .btn-secondary{display:inline-block}
+
+/* ── MESSAGE « DONNER AVIS » ── */
+.gate-overlay{position:fixed;inset:0;background:rgba(20,20,20,.6);z-index:550;display:none;align-items:center;justify-content:center;padding:20px}
+.gate-overlay.open{display:flex}
+.gate-box{background:#fff;border-radius:18px;padding:28px 22px 22px;max-width:400px;width:100%;position:relative;text-align:center}
+.gate-box h3{font-family:var(--font-display);font-size:1.2rem;margin-bottom:8px}
+.gate-box p{font-size:.88rem;color:var(--gris-moyen);margin-bottom:16px}
+.gate-box .btn-primary,.gate-box .btn-secondary{display:block;width:100%;text-align:center;margin-top:10px}
+.gate-close{position:absolute;top:10px;right:14px;border:none;background:none;font-size:1.1rem;cursor:pointer;color:var(--gris-moyen)}
+.gate-step[hidden]{display:none}
+
+/* ── BOUTON RDV FLOTTANT (mobile) ── */
+.sticky-rdv{position:fixed;left:12px;right:12px;bottom:12px;z-index:400;background:linear-gradient(135deg,var(--vert),var(--vert-fonce));color:#fff;text-decoration:none;font-weight:700;text-align:center;padding:14px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .25s}
+.sticky-rdv.hide{transform:translateY(120%)}
+body.has-sticky{padding-bottom:76px}
+@media(min-width:1024px){.sticky-rdv{display:none}body.has-sticky{padding-bottom:0}
+.reviews-wrap{flex-direction:row}.reviews-score{flex:0 0 200px}}
