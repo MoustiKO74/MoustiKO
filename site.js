@@ -38,7 +38,7 @@ function setupScrollReveal() {
   document.querySelectorAll('.section-header, .about-card, .source-card, .photo-hero, .photo-detail-card, .payment-card, .estimate-box')
     .forEach(el => el.classList.add('reveal'));
 
-  document.querySelectorAll('.why-list, .gallery-grid, .products-grid, .process-grid, .windows-grid')
+  document.querySelectorAll('.why-list, .gallery-grid, .products-grid, .pcards, .process-grid, .windows-grid')
     .forEach(el => el.classList.add('reveal-stagger'));
   document.querySelectorAll('.configurator, .wizard-wrap, .avis-form-card')
     .forEach(el => el.classList.add('reveal-scale'));
@@ -71,7 +71,8 @@ function toggleIntro(btn) {
 }
 /* ============ RECHERCHE ============ */
 const SEARCH_ITEMS = [
-  { label: 'Moustiquaire de fenêtre', url: 'fenetre.html', keywords: 'fenetre fenêtre window disponible' },
+  { label: 'Moustiquaire fenêtre', url: 'fenetre.html', keywords: 'fenetre fenêtre window disponible' },
+  { label: 'Moustiquaire aimantée sur mesure', url: 'moustiquaire-aimantee.html', keywords: 'aimantee aimantée magnetique magnétique sur mesure' },
   { label: 'Moustiquaire de porte', url: 'porte.html', keywords: 'porte door entree entrée' },
   { label: 'Moustiquaire baie vitrée', url: 'baie-vitree.html', keywords: 'baie vitree vitrée coulissante' },
   { label: 'Moustiquaire Velux', url: 'velux.html', keywords: 'velux toit fenetre de toit' },
@@ -206,3 +207,8 @@ function initStickyCta() {
 
 initReviews();
 initStickyCta();
+
+function toggleCat(btn) {
+  const open = document.getElementById('cat-intro').classList.toggle('open');
+  btn.textContent = open ? 'Lire moins' : 'Lire la suite';
+}
