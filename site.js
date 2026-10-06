@@ -263,3 +263,4 @@ function initNavCart() {
   updateCartBadge();
 }
 initNavCart();
+ 
