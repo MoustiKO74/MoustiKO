@@ -136,8 +136,12 @@ function openAvisGate(e) {
       '<button class="gate-close" onclick="closeAvisGate()" aria-label="Fermer">✕</button>' +
       '<div class="gate-step" id="gate-q"><h3>Votre moustiquaire est posée ?</h3>' +
       '<p>Pour garder des avis 100 % authentiques, ils sont réservés aux clients que j\'ai équipés.</p>' +
-      '<a class="btn-primary" href="avis.html">Oui, ma moustiquaire est posée</a>' +
+      '<button class="btn-primary" onclick="gateYes()">Oui, ma moustiquaire est posée</button>' +
       '<button class="btn-secondary" onclick="gateNotYet()">Pas encore, je vais en commander une</button></div>' +
+      '<div class="gate-step" id="gate-mot" hidden><h3>Merci beaucoup !</h3>' +
+      '<p>Votre avis Google est la meilleure aide pour MoustiKO. Dernière étape : un petit mot, directement ici (30 secondes).</p>' +
+      '<a class="btn-primary" href="avis.html">Écrire mon petit mot</a>' +
+      '<button class="btn-secondary" onclick="closeAvisGate()">Plus tard</button></div>' +
       '<div class="gate-step" id="gate-no" hidden><h3>Merci, à très vite !</h3>' +
       '<p>Une fois la pose terminée, revenez ici : votre avis sera le bienvenu. En attendant, réservez votre créneau en 1 minute.</p>' +
       '<a class="btn-primary" href="rdv.html">Prendre rendez-vous</a>' +
@@ -147,7 +151,14 @@ function openAvisGate(e) {
   }
   document.getElementById('gate-q').hidden = false;
   document.getElementById('gate-no').hidden = true;
+  document.getElementById('gate-mot').hidden = true;
   m.classList.add('open');
+}
+const GOOGLE_REVIEW_URL = 'https://g.page/r/CV-AxGSiEaj2EBM/review';
+function gateYes() {
+  window.open(GOOGLE_REVIEW_URL, '_blank', 'noopener');
+  document.getElementById('gate-q').hidden = true;
+  document.getElementById('gate-mot').hidden = false;
 }
 function gateNotYet() {
   document.getElementById('gate-q').hidden = true;
@@ -163,50 +174,36 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAvisGat
 /* Ajoutez ici vos vrais avis, un par ligne :
    { nom: 'Camille D.', commune: 'Annecy', note: 5, date: '12/09/2026', texte: 'Rapide et soigné, je recommande.' }, */
 const REVIEWS = [
+  { nom: 'Rik L.', commune: '', note: 5, date: 'Sept. 2026', texte: 'Pose impeccable, jeune homme très sympathique' },
 ];
 
 function initReviews() {
   const track = document.getElementById('reviews-track');
   if (!track) return;
-  const score = document.getElementById('reviews-score');
-  const google = document.getElementById('avis-container');
-  if (!REVIEWS.length) {
-    track.innerHTML = '<div class="rv-empty">Les premiers avis arrivent bientôt.<br>Votre moustiquaire est posée ? Donnez votre avis juste en dessous.</div>';
-    return;
-  }
-  if (google) google.style.display = 'none';
+  if (!REVIEWS.length) { document.querySelector('.reviews-wrap').style.display = 'none'; return; }
   const avg = REVIEWS.reduce((s, r) => s + r.note, 0) / REVIEWS.length;
   const stars = n => '★'.repeat(n) + '☆'.repeat(5 - n);
-  score.innerHTML = '<div class="rs-note">' + avg.toFixed(1).replace('.', ',') + '<small>/5</small></div>' +
+  document.getElementById('reviews-score').innerHTML =
+    '<div class="rs-note">' + avg.toFixed(1).replace('.', ',') + '<small>/5</small></div>' +
     '<div class="rs-stars">' + stars(Math.round(avg)) + '</div>' +
-    '<div class="rs-count">' + REVIEWS.length + ' avis</div>';
+    '<div class="rs-count">' + REVIEWS.length + ' avis</div>' +
+    '<a class="rs-link" href="avis.html" onclick="openAvisGate(event)">Donner mon avis →</a>';
   track.innerHTML = REVIEWS.map(r =>
-    '<div class="rv-card"><div class="rv-stars">' + stars(r.note) + '</div>' +
+    '<div class="rv-card"><div class="rv-head"><span class="rv-medal">★</span>' +
+    '<span class="rv-stars">' + stars(r.note) + '</span><span class="rv-info">i</span></div>' +
     '<p class="rv-text">' + r.texte + '</p><span class="rv-quote">”</span>' +
     '<div class="rv-author"><div class="rv-avatar">' + r.nom.charAt(0) + '</div>' +
-    '<div><b>' + r.nom + '</b><small>' + r.commune + ' · ' + r.date + '</small></div>' +
-    '<div class="rv-verified">✓ Client<br>MoustiKO</div></div></div>').join('');
+    '<div><b>' + r.nom + '</b><small>' + [r.commune, r.date].filter(Boolean).join(' · ') + '</small></div>' +
+    '<div class="rv-verified">✔ CLIENT<br>AUTHENTIQUE</div></div></div>').join('');
+  const over = track.scrollWidth > track.clientWidth + 2;
+  document.querySelectorAll('.rv-arrow').forEach(b => { b.style.display = over ? '' : 'none'; });
 }
 function scrollReviews(dir) {
   const t = document.getElementById('reviews-track');
   if (t) t.scrollBy({ left: dir * 284, behavior: 'smooth' });
 }
 
-/* ============ BOUTON RDV FLOTTANT (mobile) ============ */
-function initStickyCta() {
-  if (/rdv|avis/.test(location.pathname)) return;
-  const a = document.createElement('a');
-  a.className = 'sticky-rdv';
-  a.href = 'rdv.html';
-  a.textContent = 'Prendre rendez-vous · dès 45 €';
-  document.body.appendChild(a);
-  document.body.classList.add('has-sticky');
-  const foot = document.querySelector('footer');
-  if (foot) new IntersectionObserver(en => a.classList.toggle('hide', en[0].isIntersecting)).observe(foot);
-}
-
 initReviews();
-initStickyCta();
 
 function toggleCat(btn) {
   const open = document.getElementById('cat-intro').classList.toggle('open');
