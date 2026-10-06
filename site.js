@@ -177,26 +177,52 @@ const REVIEWS = [
   { nom: 'Rik L.', commune: '', note: 5, date: 'Sept. 2026', texte: 'Pose impeccable, jeune homme très sympathique' },
 ];
 
-function initReviews() {
+/* Avis Google automatiques : renseignez ces 2 valeurs (clé API restreinte à moustiko74.fr) */
+const GOOGLE_PLACE_ID = '';
+const GOOGLE_API_KEY = '';
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function shortName(n) {
+  const p = (n || 'Client').trim().split(/\s+/);
+  return p.length > 1 ? p[0] + ' ' + p[1][0].toUpperCase() + '.' : p[0];
+}
+function renderReviews(list, avg, count) {
   const track = document.getElementById('reviews-track');
-  if (!track) return;
-  if (!REVIEWS.length) { document.querySelector('.reviews-wrap').style.display = 'none'; return; }
-  const avg = REVIEWS.reduce((s, r) => s + r.note, 0) / REVIEWS.length;
+  const wrap = document.querySelector('.reviews-wrap');
+  if (!list.length) { wrap.style.display = 'none'; return; }
+  wrap.style.display = '';
+  avg = avg || list.reduce((s, r) => s + r.note, 0) / list.length;
+  count = count || list.length;
   const stars = n => '★'.repeat(n) + '☆'.repeat(5 - n);
   document.getElementById('reviews-score').innerHTML =
     '<div class="rs-note">' + avg.toFixed(1).replace('.', ',') + '<small>/5</small></div>' +
     '<div class="rs-stars">' + stars(Math.round(avg)) + '</div>' +
-    '<div class="rs-count">' + REVIEWS.length + ' avis</div>' +
+    '<div class="rs-count">' + count + ' avis</div>' +
     '<a class="rs-link" href="avis.html" onclick="openAvisGate(event)">Donner mon avis →</a>';
-  track.innerHTML = REVIEWS.map(r =>
+  track.innerHTML = list.map(r =>
     '<div class="rv-card"><div class="rv-head"><span class="rv-medal">★</span>' +
     '<span class="rv-stars">' + stars(r.note) + '</span><span class="rv-info">i</span></div>' +
-    '<p class="rv-text">' + r.texte + '</p><span class="rv-quote">”</span>' +
-    '<div class="rv-author"><div class="rv-avatar">' + r.nom.charAt(0) + '</div>' +
-    '<div><b>' + r.nom + '</b><small>' + [r.commune, r.date].filter(Boolean).join(' · ') + '</small></div>' +
-    '<div class="rv-verified">✔ CLIENT<br>AUTHENTIQUE</div></div></div>').join('');
+    '<p class="rv-text">' + esc(r.texte) + '</p><span class="rv-quote">”</span>' +
+    '<div class="rv-author"><div class="rv-avatar">' + esc(r.nom.charAt(0)) + '</div>' +
+    '<div><b>' + esc(r.nom) + '</b><small>' + esc([r.commune, r.date].filter(Boolean).join(' · ')) + '</small></div>' +
+    '<div class="rv-verified">✔ ' + (r.g ? 'AVIS<br>GOOGLE' : 'CLIENT<br>AUTHENTIQUE') + '</div></div></div>').join('');
   const over = track.scrollWidth > track.clientWidth + 2;
   document.querySelectorAll('.rv-arrow').forEach(b => { b.style.display = over ? '' : 'none'; });
+}
+async function initReviews() {
+  if (!document.getElementById('reviews-track')) return;
+  renderReviews(REVIEWS);
+  if (!GOOGLE_PLACE_ID || !GOOGLE_API_KEY) return;
+  try {
+    const r = await fetch('https://places.googleapis.com/v1/places/' + GOOGLE_PLACE_ID + '?languageCode=fr', {
+      headers: { 'X-Goog-Api-Key': GOOGLE_API_KEY, 'X-Goog-FieldMask': 'rating,userRatingCount,reviews' }
+    });
+    const d = await r.json();
+    const list = (d.reviews || []).filter(v => v.text && v.text.text).map(v => ({
+      nom: shortName(v.authorAttribution && v.authorAttribution.displayName), note: v.rating,
+      date: v.relativePublishTimeDescription || '', commune: '', texte: v.text.text, g: true
+    }));
+    if (list.length) renderReviews(list, d.rating, d.userRatingCount);
+  } catch (e) { /* on garde les avis saisis à la main */ }
 }
 function scrollReviews(dir) {
   const t = document.getElementById('reviews-track');
@@ -209,3 +235,31 @@ function toggleCat(btn) {
   const open = document.getElementById('cat-intro').classList.toggle('open');
   btn.textContent = open ? 'Lire moins' : 'Lire la suite';
 }
+
+/* ============ PRIX, PROMO & PANIER (sans compte) ============ */
+const UNIT_PRICE = 45;
+const PROMO_PCT = 10; /* % affiché comme économie (prix barré). Mettre 0 pour désactiver. */
+function calcUnits(w, h) { return Math.max(1, Math.ceil((w / 100) * (h / 100))); }
+function calcPrice(w, h, qty) { return calcUnits(w, h) * qty * UNIT_PRICE; }
+function promoOld(p) { return PROMO_PCT ? Math.round(p / (1 - PROMO_PCT / 100)) : p; }
+function eur(n) { return n.toFixed(2).replace('.', ',') + ' €'; }
+function getCart() { try { return JSON.parse(localStorage.getItem('moustiko_cart') || '[]'); } catch (e) { return []; } }
+function saveCart(c) { try { localStorage.setItem('moustiko_cart', JSON.stringify(c)); } catch (e) {} updateCartBadge(); }
+function addToCart(item) { const c = getCart(); c.push(item); saveCart(c); }
+function updateCartBadge() {
+  const n = getCart().reduce((s, i) => s + (i.qty || 1), 0);
+  const b = document.getElementById('cart-count');
+  if (b) { b.textContent = n; b.style.display = n ? '' : 'none'; }
+}
+function initNavCart() {
+  const nav = document.querySelector('nav');
+  if (!nav || document.getElementById('cart-count')) return;
+  const a = document.createElement('a');
+  a.className = 'nav-cart';
+  a.href = 'panier.html';
+  a.setAttribute('aria-label', 'Panier');
+  a.innerHTML = '🛒<span class="cart-count" id="cart-count"></span>';
+  nav.appendChild(a);
+  updateCartBadge();
+}
+initNavCart();

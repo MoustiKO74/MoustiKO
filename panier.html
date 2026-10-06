@@ -2,11 +2,12 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <link rel="canonical" href="https://moustiko74.fr/fenetre.html">
+  <link rel="canonical" href="https://moustiko74.fr/panier.html">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Moustiquaire de fenêtre sur mesure, posée chez vous sans perçage. Cadre aluminium, toile maille fine, noir ou blanc, à partir de 45€. Intervention en Haute-Savoie.">
+  <meta name="description" content="Moustiquaire aimantée sur mesure, posée chez vous sans perçage. Cadre aluminium, toile maille fine, noir ou blanc, à partir de 45€. Intervention en Haute-Savoie.">
   <meta property="og:site_name" content="MoustiKO">
-  <title>Moustiquaire de fenêtre sur mesure — MoustiKO</title>
+  <title>Mon panier — MoustiKO</title>
+  <meta name="robots" content="noindex">
   <link rel="icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,23 +40,11 @@
   </div>
   <div class="search-results" id="search-results"></div>
 </div>
-<main class="cat-page">
-  <nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a> <i>›</i> <b>Moustiquaire fenêtre</b></nav>
-  <h1>Moustiquaire fenêtre</h1>
-  <div class="cat-intro" id="cat-intro">
-    <p>Chez MoustiKO, la moustiquaire de fenêtre se fait sur mesure, avec une fixation aimantée et sans aucun perçage. Que ce soit pour la chambre, le salon, la cuisine ou la salle de bain, nous avons la solution. Cadre aluminium, toile à maille fine, finition noire ou blanche : je prends les mesures chez vous, puis je découpe et je pose le jour même, partout en Haute-Savoie.</p>
-  </div>
-  <button class="cat-more" onclick="toggleCat(this)">Lire la suite</button>
-  <div class="pcards cat-grid">
-    <div class="pcard flat">
-      <a href="moustiquaire-aimantee.html" class="pcard-img white"><img src="assets/img/produit-fenetre.jpg" alt="Moustiquaire aimantée sur mesure"><span class="badge-new">Disponible</span></a>
-      <div class="pcard-body">
-        <small>Moustiquaire fenêtre</small>
-        <h3 class="big">Moustiquaire aimantée sur mesure</h3>
-        <div class="cat-price">À partir de <b>45 €</b></div>
-        <a href="moustiquaire-aimantee.html" class="btn-outline">Découvrir</a>
-      </div>
-    </div>
+<main class="cart-page">
+  <h1>Panier</h1>
+  <div class="cart-grid">
+    <div id="cart-items"></div>
+    <aside class="cart-sum" id="cart-sum"></aside>
   </div>
 </main>
 
@@ -74,6 +63,8 @@
   <div class="footer-bottom">© 2026 MoustiKO · Tous droits réservés</div>
 </footer>
 
+<div class="toast" id="toast"></div>
+
 <div class="lightbox-overlay" id="lightbox-overlay" onclick="closeLightbox()">
   <img id="lightbox-img" src="" alt="Aperçu agrandi">
 </div>
@@ -90,5 +81,31 @@
 </div>
 
 <script src="site.js?v=5"></script>
+<script>
+  function renderCart() {
+    const cart = getCart(), box = document.getElementById('cart-items'), sum = document.getElementById('cart-sum');
+    if (!cart.length) {
+      box.innerHTML = '<div class="cart-empty"><h2>Votre panier est vide</h2><p>Ajoutez une moustiquaire sur mesure pour commencer.</p><a class="btn-primary" href="index.html#services">Voir nos produits</a></div>';
+      sum.style.display = 'none'; return;
+    }
+    sum.style.display = '';
+    let total = 0, old = 0, n = 0;
+    box.innerHTML = cart.map((it, i) => {
+      const o = promoOld(it.price); total += it.price; old += o; n += it.qty;
+      return '<div class="cart-line"><img src="assets/img/produit-fenetre.jpg" alt=""><div class="cl-main"><b>' + esc(it.room) + '</b>' +
+        '<div class="cl-sub">' + it.w + ' × ' + it.h + ' cm · ' + esc(it.material) + '</div>' +
+        '<div class="cl-act"><select onchange="setQty(' + i + ',this.value)">' + [1,2,3,4,5,6,7,8,9,10].map(q => '<option' + (q == it.qty ? ' selected' : '') + '>' + q + '</option>').join('') + '</select>' +
+        '<a href="#" onclick="delLine(' + i + ',event)">Supprimer</a></div></div>' +
+        '<div class="cl-price">' + (PROMO_PCT ? '<s>' + eur(o) + '</s>' : '') + '<b>' + eur(it.price) + '</b></div></div>';
+    }).join('');
+    sum.innerHTML = '<div class="cs-line">Sous-total (' + n + ' article' + (n > 1 ? 's' : '') + ') : <b>' + eur(total) + '</b></div>' +
+      (PROMO_PCT ? '<div class="cs-save">Vous économisez ' + eur(old - total) + '</div>' : '') +
+      '<div class="cs-pay">💵 Paiement en liquide à la pose</div>' +
+      '<a class="btn-primary cs-btn" href="rdv.html">Passer la commande</a>';
+  }
+  function setQty(i, q) { const c = getCart(); c[i].qty = +q; c[i].price = calcPrice(c[i].w, c[i].h, c[i].qty); saveCart(c); renderCart(); }
+  function delLine(i, e) { e.preventDefault(); const c = getCart(); c.splice(i, 1); saveCart(c); renderCart(); }
+  renderCart();
+</script>
 </body>
 </html>

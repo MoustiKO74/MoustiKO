@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 
@@ -39,91 +39,49 @@
   </div>
   <div class="search-results" id="search-results"></div>
 </div>
-<!-- PAGE HERO -->
-<section class="page-hero">
-  <div class="hero-media">
-    <img class="hero-bg-img" src="assets/img/hero-bg.jpg" alt="Moustiquaire aimantée sur mesure">
-    <div class="hero-overlay"></div>
-  </div>
-  <div class="hero-content">
-    <a href="fenetre.html" class="breadcrumb">← Moustiquaire fenêtre</a>
-    <div class="status-pill available">✓ Disponible dès maintenant</div>
-    <h1>Moustiquaire aimantée sur mesure</h1>
-    <p class="hero-sub">Cadre aluminium et toile tendue, posés chez vous sans perçage.</p>
-    <p class="hero-price">À partir de 45 €</p>
-    <div class="hero-btns"><a href="rdv.html" class="btn-primary">Prendre rendez-vous</a><a href="index.html#tarifs" class="btn-secondary">Calculer mon prix</a></div>
-  </div>
-</section>
-<section class="page-content" style="padding-bottom:0;">
-  <div class="product-intro">
-    <div class="intro-clip"><p>Chez MoustiKO, la moustiquaire aimantée est mon produit phare&nbsp;: sur mesure, fixée par aimants sans perçage et disponible dès aujourd'hui en Haute-Savoie. Cadre aluminium renforcé, toile à maille fine, finition noire ou blanche au choix. Je prends les mesures directement chez vous puis je découpe et pose la moustiquaire le jour même, pour un rendu parfaitement ajusté à votre fenêtre.</p></div>
-    <button class="intro-toggle" onclick="toggleIntro(this)">Afficher plus</button>
-  </div>
-</section>
-<section class="page-content">
-  <div class="section-header">
-    <span class="section-label">Le produit</span>
-    <h2>Ce qui est inclus</h2>
-    <p>Une moustiquaire pensée pour durer, installée en une seule visite.</p>
-  </div>
-  <div class="why-list">
-    <div class="why-item">
-      <div class="why-icon">📏</div>
-      <div class="why-content"><h4>Sur mesure au centimètre près</h4><p>Je prends les dimensions exactes de votre fenêtre lors du rendez-vous, pour un ajustement parfait.</p></div>
+<main class="pp-page">
+  <nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a> <i>›</i> <a href="fenetre.html">Moustiquaire fenêtre</a> <i>›</i> <b>Moustiquaire aimantée</b></nav>
+  <div class="pp">
+    <h1 class="pp-title">Moustiquaire aimantée sur mesure</h1>
+    <div class="pp-gallery">
+      <div class="pp-main" id="pp-main"><img onclick="openLightbox(this.src)" src="assets/img/produit-fenetre.jpg" alt="Moustiquaire aimantée sur mesure, photo 1"><img onclick="openLightbox(this.src)" src="assets/img/installation-fenetre.jpg" alt="Moustiquaire aimantée sur mesure, photo 2"><img onclick="openLightbox(this.src)" src="assets/img/toile-detail-reelle.jpg" alt="Moustiquaire aimantée sur mesure, photo 3"><img onclick="openLightbox(this.src)" src="assets/img/vue-interieure-posee.jpg" alt="Moustiquaire aimantée sur mesure, photo 4"></div>
+      <div class="pp-thumbs" id="pp-thumbs"><button type="button" class="on" aria-label="Photo 1"><img src="assets/img/produit-fenetre.jpg" alt=""></button><button type="button" aria-label="Photo 2"><img src="assets/img/installation-fenetre.jpg" alt=""></button><button type="button" aria-label="Photo 3"><img src="assets/img/toile-detail-reelle.jpg" alt=""></button><button type="button" aria-label="Photo 4"><img src="assets/img/vue-interieure-posee.jpg" alt=""></button></div>
     </div>
-    <div class="why-item">
-      <div class="why-icon">🧲</div>
-      <div class="why-content"><h4>Fixation aimantée</h4><p>Une bande magnétique sur votre encadrement : aucun trou dans la menuiserie, et elle se retire en un geste.</p></div>
-    </div>
-    <div class="why-item">
-      <div class="why-icon">🎨</div>
-      <div class="why-content"><h4>Noir ou blanc au choix</h4><p>Cadre aluminium disponible dans les deux teintes les plus demandées, pour s'accorder à vos fenêtres.</p></div>
-    </div>
-    <div class="why-item">
-      <div class="why-icon">⚡</div>
-      <div class="why-content"><h4>Posée le jour même</h4><p>Mesure, découpe et installation se font en une seule visite, généralement en moins d'une heure.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-alt">
-  <div class="section-header">
-    <span class="section-label">En photos</span>
-    <h2>Mes moustiquaires en photos</h2>
-    <p>De vraies installations, chez de vrais clients, en Haute-Savoie.</p>
-  </div>
-  <div class="photo-hero">
-    <img onclick="openLightbox(this.src)" class="zoomable" src="assets/img/installation-fenetre.jpg" alt="Installation d'une moustiquaire MoustiKO chez un client">
-    <div class="photo-hero-caption">Pose chez un client — sans perçage, en moins d'une heure</div>
-  </div>
-
-  <div class="gallery-grid">
-    <div class="gallery-card">
-      <div class="gallery-visual">
-        <img onclick="openLightbox(this.src)" class="zoomable" src="assets/img/toile-detail-reelle.jpg" alt="Détail de la toile moustiquaire installée">
+    <div class="pp-info">
+      <div class="pp-from">À partir de <b>45,00 €</b></div>
+      <div class="cat-intro" id="cat-intro"><p>La moustiquaire aimantée sur mesure est une protection efficace, discrète et silencieuse pour vos fenêtres. Fabriquée à vos dimensions, elle se fixe grâce à une bande magnétique posée sur votre encadrement : aucun perçage, aucune trace, et elle se retire en un geste. Cadre aluminium, toile à maille fine, finition noire ou blanche. Je prends les mesures chez vous, puis je découpe et je pose la moustiquaire le jour même, partout en Haute-Savoie.</p></div>
+      <button class="cat-more" onclick="toggleCat(this)">Lire la suite</button>
+      <div class="pp-badges"><span>⏱ Pose en moins d'1 h</span><span>📏 Fabriquée sur mesure</span><span>🧲 Sans perçage</span></div>
+      <h2 class="pp-h2">Votre configuration</h2>
+      <div class="pp-box">
+        <div class="pp-sec">
+          <h3>Dimensions *</h3>
+          <p class="pp-hint">Indiquez la largeur et la hauteur de votre encadrement, en cm. Une estimation suffit : je vérifie les mesures exactes chez vous avant la découpe.</p>
+          <div class="pp-dims">
+            <label>Largeur (en cm)<input class="pp-in" id="pp-w" type="number" inputmode="numeric" min="20" value="60" oninput="updatePP()"></label>
+            <label>Hauteur (en cm)<input class="pp-in" id="pp-h" type="number" inputmode="numeric" min="20" value="90" oninput="updatePP()"></label>
+          </div>
+        </div>
+        <div class="pp-sec">
+          <h3>Coloris de la structure *</h3>
+          <div class="pp-sw">
+            <button type="button" class="sw on" data-c="noir" onclick="pickColor(this)"><i style="background:#1f2328"></i>Noir</button>
+            <button type="button" class="sw" data-c="blanc" onclick="pickColor(this)"><i style="background:#fff"></i>Blanc</button>
+          </div>
+        </div>
       </div>
-      <div class="gallery-caption">Toile fine et résistante<span class="gc-sub">Vue rapprochée une fois posée</span></div>
-    </div>
-    <div class="gallery-card">
-      <div class="gallery-visual">
-        <img onclick="openLightbox(this.src)" class="zoomable" src="assets/img/vue-interieure-posee.jpg" alt="Vue depuis l'intérieur à travers la moustiquaire posée">
+      <div class="pp-buy">
+        <div class="pp-prices"><span class="pp-old" id="pp-old"></span><span class="pp-new" id="pp-new"></span><span class="pp-save" id="pp-save"></span></div>
+        <div class="pp-actions">
+          <select class="pp-qty" id="pp-qty" onchange="updatePP()" aria-label="Quantité"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>
+          <button class="btn-primary" onclick="addPP()">Ajouter au panier</button>
+        </div>
+        <div class="pp-pills"><span>💵 Paiement en liquide à la pose</span></div>
+        <div class="pp-added" id="pp-added"><b>✔ Ajouté au panier</b><div><a class="btn-primary" href="panier.html">Passer la commande</a><a class="btn-outline" href="index.html#services">Continuer</a></div></div>
       </div>
-      <div class="gallery-caption">Vue depuis l'intérieur<span class="gc-sub">Une fois la moustiquaire posée</span></div>
     </div>
   </div>
-</section>
-
-<section class="section">
-  <div class="section-header" style="margin-bottom:14px;">
-    <span class="section-label">Tarif</span>
-    <h2>À partir de 45 € la fenêtre</h2>
-    <p>Le prix dépend des dimensions. Estimation instantanée dans le configurateur.</p>
-  </div>
-  <div class="hero-btns">
-    <a href="rdv.html" class="btn-primary">Prendre rendez-vous</a>
-    <a href="index.html#tarifs" class="btn-secondary">Calculer mon prix</a>
-  </div>
-</section>
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -140,6 +98,8 @@
   <div class="footer-bottom">© 2026 MoustiKO · Tous droits réservés</div>
 </footer>
 
+<div class="toast" id="toast"></div>
+
 <div class="lightbox-overlay" id="lightbox-overlay" onclick="closeLightbox()">
   <img id="lightbox-img" src="" alt="Aperçu agrandi">
 </div>
@@ -155,6 +115,29 @@
   </div>
 </div>
 
-<script src="site.js"></script>
+<script src="site.js?v=5"></script>
+<script>
+  let ppColor = 'noir';
+  function pickColor(b) { ppColor = b.dataset.c; document.querySelectorAll('.sw').forEach(x => x.classList.toggle('on', x === b)); }
+  function ppVals() { return { w: parseInt(document.getElementById('pp-w').value) || 0, h: parseInt(document.getElementById('pp-h').value) || 0, qty: parseInt(document.getElementById('pp-qty').value) || 1 }; }
+  function updatePP() {
+    const v = ppVals();
+    const ok = v.w >= 20 && v.h >= 20;
+    const p = ok ? calcPrice(v.w, v.h, v.qty) : UNIT_PRICE * v.qty, o = promoOld(p);
+    document.getElementById('pp-new').textContent = eur(p);
+    document.getElementById('pp-old').textContent = PROMO_PCT ? eur(o) : '';
+    document.getElementById('pp-save').textContent = PROMO_PCT ? 'Vous économisez ' + PROMO_PCT + ' % (-' + eur(o - p) + ')' : '';
+  }
+  function addPP() {
+    const v = ppVals();
+    if (v.w < 20 || v.h < 20) { showToast('⚠️ Entrez des dimensions valides (20 cm minimum)'); return; }
+    addToCart({ room: 'Moustiquaire aimantée', w: v.w, h: v.h, qty: v.qty, material: ppColor, price: calcPrice(v.w, v.h, v.qty) });
+    document.getElementById('pp-added').style.display = 'block';
+  }
+  const ppMain = document.getElementById('pp-main'), ppTh = [...document.querySelectorAll('#pp-thumbs button')];
+  ppTh.forEach((b, i) => b.addEventListener('click', () => ppMain.scrollTo({ left: i * ppMain.clientWidth, behavior: 'smooth' })));
+  ppMain.addEventListener('scroll', () => { const i = Math.round(ppMain.scrollLeft / ppMain.clientWidth); ppTh.forEach((b, k) => b.classList.toggle('on', k === i)); });
+  updatePP();
+</script>
 </body>
 </html>

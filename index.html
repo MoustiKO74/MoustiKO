@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 
@@ -275,7 +275,7 @@
   </div>
 </div>
 
-<script src="site.js"></script>
+<script src="site.js?v=5"></script>
 <script>
   /* ============ MATERIAUX ============ */
   let selectedMaterial = 'noir';
@@ -287,15 +287,6 @@
   }
 
   /* ============ PRIX ============ */
-  const UNIT_PRICE = 45;
-
-  function calcUnits(w, h) {
-    const area = (w / 100) * (h / 100);
-    return Math.max(1, Math.ceil(area / 1.0));
-  }
-  function calcPrice(w, h, qty) {
-    return calcUnits(w, h) * qty * UNIT_PRICE;
-  }
   function updatePricePreview() {
     const w = parseInt(document.getElementById('width').value) || 60;
     const h = parseInt(document.getElementById('height').value) || 90;
@@ -316,6 +307,8 @@
   }
 
   let windows = [];
+  try { windows = JSON.parse(localStorage.getItem('moustiko_cart') || '[]'); } catch(e) {}
+  renderWindowsList();
   function addWindow() {
     const w = parseInt(document.getElementById('width').value);
     const h = parseInt(document.getElementById('height').value);
@@ -354,7 +347,8 @@
   }
 
   function persistWindows() {
-    try { localStorage.setItem('moustiko_windows', JSON.stringify(windows)); } catch(e) {}
+    updateCartBadge();
+    try { localStorage.setItem('moustiko_cart', JSON.stringify(windows)); } catch(e) {}
   }
 
   function showToast(msg) {

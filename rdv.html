@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 
@@ -56,20 +56,29 @@
 
     <div class="stepper" id="stepper"></div>
 
-    <!-- STEP 1: RDV -->
+    <!-- STEP 0: Récapitulatif -->
     <div class="step-panel active" id="panel-0">
+      <h3 class="recap-title">Récapitulatif de votre commande</h3>
+      <div id="order-recap"></div>
+      <div class="wizard-nav">
+        <button class="btn-primary" style="width:100%" onclick="goToStep(1)">Choisir ma date →</button>
+      </div>
+    </div>
+
+    <!-- STEP 1: RDV -->
+    <div class="step-panel" id="panel-1">
       <div id="calendar-wrap"><div class="loading-placeholder">Chargement du calendrier…</div></div>
       <div class="slot-panel" id="slot-panel">
         <div class="slot-panel-title" id="slot-panel-title"></div>
         <div class="slot-grid" id="slot-grid"></div>
       </div>
       <div class="wizard-nav">
-        <button class="btn-primary" id="btn-step1-next" disabled onclick="goToStep(1)" style="width:100%">Étape suivante →</button>
+        <button class="btn-primary" id="btn-step1-next" disabled onclick="goToStep(2)" style="width:100%">Étape suivante →</button>
       </div>
     </div>
 
     <!-- STEP 2: Coordonnées -->
-    <div class="step-panel" id="panel-1">
+    <div class="step-panel" id="panel-2">
       <div class="recap-box">🗓 <span id="recap-date-1">—</span></div>
       <label class="field-label">Prénom et nom</label>
       <input type="text" class="full-input" id="rdv-nom" placeholder="ex: Camille Dupont">
@@ -78,13 +87,13 @@
       <label class="field-label">Adresse</label>
       <input type="text" class="full-input" id="rdv-adresse" placeholder="Adresse, commune (Haute-Savoie)">
       <div class="wizard-nav">
-        <button class="btn-secondary" onclick="goToStep(0)">← Retour</button>
+        <button class="btn-secondary" onclick="goToStep(1)">← Retour</button>
         <button class="btn-primary" onclick="validateStep2()">Étape suivante →</button>
       </div>
     </div>
 
     <!-- STEP 3: Paiement -->
-    <div class="step-panel" id="panel-2">
+    <div class="step-panel" id="panel-3">
       <div class="recap-box">🗓 <span id="recap-date-2">—</span></div>
       <div class="payment-card">
         <div class="payment-icon">💵</div>
@@ -103,16 +112,15 @@
         <span>J'ai compris que le paiement s'effectue en espèces à la fin de l'intervention.</span>
       </label>
       <div class="wizard-nav">
-        <button class="btn-secondary" onclick="goToStep(1)">← Retour</button>
+        <button class="btn-secondary" onclick="goToStep(2)">← Retour</button>
         <button class="btn-primary" id="btn-confirm" onclick="confirmRdv()">Confirmer mon RDV ✓</button>
       </div>
     </div>
 
     <!-- STEP 4: Confirmation -->
-    <div class="step-panel" id="panel-3">
+    <div class="step-panel" id="panel-4">
       <div class="success-state">
-        <div class="success-circle">✅</div>
-        <h3>Rendez-vous confirmé !</h3>
+        <div class="order-ok"><div class="tick">✓</div><div><h3 id="success-title">Rendez-vous confirmé !</h3><p id="success-sub"></p></div></div>
         <div class="success-recap" id="success-recap"></div>
         <p class="confirm-note">Envoyez-moi un SMS de confirmation avec le bouton ci-dessous — je n'ai pas (encore) de secrétariat. 😉 En cas d'imprévu, contactez-moi directement.</p>
         <a href="#" id="sms-confirm-link" class="btn-primary" style="display:block;text-align:center;margin-bottom:10px;padding:15px;">💬 Envoyer le SMS de confirmation</a>
@@ -150,7 +158,7 @@
     <button class="cookie-btn-accept" onclick="handleCookie()">Accepter</button>
   </div>
 </div>
-<script src="site.js"></script>
+<script src="site.js?v=5"></script>
 <script>
   /* ============ TOAST ============ */
   function showToast(msg) {
@@ -162,8 +170,23 @@
 
   /* ============ PONT AVEC LE CONFIGURATEUR (page d'accueil) ============ */
   let windows = [];
-  try { windows = JSON.parse(localStorage.getItem('moustiko_windows') || '[]'); } catch(e) { windows = []; }
+  try { windows = JSON.parse(localStorage.getItem('moustiko_cart') || '[]'); } catch(e) { windows = []; }
 
+  function orderLines() {
+    return windows.map(w => w.room + ' ' + w.w + 'x' + w.h + ' cm ' + w.material + ' x' + w.qty + ' = ' + w.price + ' €').join(' | ');
+  }
+  function renderRecap() {
+    const box = document.getElementById('order-recap');
+    if (!windows.length) {
+      box.innerHTML = '<p class="oc-empty">Votre panier est vide. Vous pouvez choisir une moustiquaire, ou prendre rendez-vous sans commande.</p><a class="btn-secondary" style="display:block;text-align:center;margin-bottom:12px" href="index.html#services">Voir nos produits</a>';
+      return;
+    }
+    const total = windows.reduce((s, w) => s + w.price, 0);
+    box.innerHTML = windows.map(w => '<div class="oc-row"><span>' + w.room + ' — ' + w.w + ' × ' + w.h + ' cm · ' + w.material + ' × ' + w.qty + '</span><b>' + eur(w.price) + '</b></div>').join('') +
+      '<div class="oc-row oc-total"><span>Total</span><b>' + eur(total) + '</b></div>' +
+      '<div class="oc-pay">💵 Paiement en liquide à la pose, aucun paiement en ligne.</div>' +
+      '<a class="oc-edit" href="panier.html">Modifier mon panier</a>';
+  }
   function updateEstimateBox() {
     const box = document.getElementById('est-amount');
     const note = document.getElementById('est-note');
@@ -171,7 +194,7 @@
     if (windows.length > 0) {
       const total = windows.reduce((s, w) => s + w.price, 0);
       box.textContent = total + ' €';
-      note.innerHTML = 'Basé sur les ' + windows.length + ' fenêtre(s) ajoutée(s) dans le configurateur de l\'accueil. Montant confirmé après mesure exacte sur place.';
+      note.innerHTML = 'Basé sur votre commande (' + windows.length + ' article(s)). Montant confirmé après mesure exacte sur place.';
     } else {
       box.textContent = 'À définir sur place';
     }
@@ -344,7 +367,7 @@
   }
 
   /* ============ WIZARD STEPPER ============ */
-  const STEP_LABELS = ['Rendez-vous', 'Coordonnées', 'Paiement', 'Confirmation'];
+  const STEP_LABELS = ['Récap', 'Date', 'Coordonnées', 'Paiement', 'Confirmé'];
   let currentStep = 0;
 
   function renderStepper() {
@@ -365,16 +388,16 @@
   }
 
   function goToStep(step) {
-    if (step === 1 && (!selectedDateKey || !selectedTime)) { showToast('⚠️ Choisissez une date et un horaire'); return; }
+    if (step === 2 && (!selectedDateKey || !selectedTime)) { showToast('⚠️ Choisissez une date et un horaire'); return; }
     currentStep = step;
     document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
     document.getElementById('panel-' + step).classList.add('active');
     renderStepper();
-    if (step === 1 || step === 2) {
+    if (step === 2 || step === 3) {
       document.getElementById('recap-date-1') && (document.getElementById('recap-date-1').textContent = getSelectedLabel());
       document.getElementById('recap-date-2') && (document.getElementById('recap-date-2').textContent = getSelectedLabel());
     }
-    if (step === 2) updateEstimateBox();
+    if (step === 3) updateEstimateBox();
     document.getElementById('rdv').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -383,7 +406,7 @@
     const tel = document.getElementById('rdv-tel').value.trim();
     const addr = document.getElementById('rdv-adresse').value.trim();
     if (!nom || !tel || !addr) { showToast('⚠️ Remplissez tous les champs'); return; }
-    goToStep(2);
+    goToStep(3);
   }
 
   const FORMSPREE_URL = 'https://formspree.io/f/mwvdylev';
@@ -419,7 +442,8 @@
           nom: nom,
           telephone: tel,
           adresse: addr,
-          montant_estime: montantTxt
+          montant_estime: montantTxt,
+          commande: orderLines()
         })
       });
     } catch(e) { console.error('Erreur envoi Formspree RDV', e); }
@@ -431,6 +455,7 @@
       <div class="sr-row"><span>Téléphone</span><span>${tel}</span></div>
       <div class="sr-row"><span>Adresse</span><span>${addr}</span></div>
       <div class="sr-row"><span>Montant</span><span>${montantTxt}</span></div>
+      ${windows.length ? '<div class="sr-row"><span>Articles</span><span>' + orderLines() + '</span></div>' : ''}
     `;
 
     // construire le SMS pre-rempli avec les infos du RDV
@@ -438,9 +463,14 @@
     const smsLink = document.getElementById('sms-confirm-link');
     smsLink.href = 'sms:+33761559872?body=' + encodeURIComponent(smsBody);
 
-    currentStep = 3;
+    const hadOrder = windows.length > 0;
+    document.getElementById('success-title').textContent = hadOrder ? 'Votre commande a bien été effectuée' : 'Rendez-vous confirmé !';
+    document.getElementById('success-sub').textContent = hadOrder ? 'Paiement en liquide à la pose, le ' + getSelectedLabel() + '.' : 'Je me déplace chez vous à la date choisie.';
+    try { localStorage.removeItem('moustiko_cart'); } catch(e) {}
+    windows = []; updateCartBadge();
+    currentStep = 4;
     document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('panel-3').classList.add('active');
+    document.getElementById('panel-4').classList.add('active');
     renderStepper();
     document.getElementById('rdv').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
@@ -456,13 +486,14 @@
     document.getElementById('btn-step1-next').disabled = true;
     buildCalendar();
     renderCalendar();
-    currentStep = 0;
+    currentStep = 1;
     document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('panel-0').classList.add('active');
+    document.getElementById('panel-1').classList.add('active');
     renderStepper();
   }
 
   async function init() {
+    renderRecap();
     try {
       const res = await window.storage.get('moustiko_booked_slots', true);
       bookedSlots = res && res.value ? JSON.parse(res.value) : [];
