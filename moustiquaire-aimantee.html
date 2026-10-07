@@ -42,10 +42,11 @@
 <main class="pp-page">
   <nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a> <i>›</i> <a href="fenetre.html">Moustiquaire fenêtre</a> <i>›</i> <b>Moustiquaire aimantée</b></nav>
   <div class="pp">
-    <h1 class="pp-title">Moustiquaire aimantée sur mesure</h1>
+    <div class="pp-title"><h1>Moustiquaire aimantée sur mesure</h1><div class="pp-best"><span class="best">#1 Meilleure vente</span> dans Moustiquaire fenêtre</div></div>
     <div class="pp-gallery">
-      <div class="pp-main" id="pp-main"><img onclick="openLightbox(this.src)" src="assets/img/produit-fenetre.jpg" alt="Moustiquaire aimantée sur mesure, photo 1"><img onclick="openLightbox(this.src)" src="assets/img/installation-fenetre.jpg" alt="Moustiquaire aimantée sur mesure, photo 2"><img onclick="openLightbox(this.src)" src="assets/img/toile-detail-reelle.jpg" alt="Moustiquaire aimantée sur mesure, photo 3"><img onclick="openLightbox(this.src)" src="assets/img/vue-interieure-posee.jpg" alt="Moustiquaire aimantée sur mesure, photo 4"></div>
-      <div class="pp-thumbs" id="pp-thumbs"><button type="button" class="on" aria-label="Photo 1"><img src="assets/img/produit-fenetre.jpg" alt=""></button><button type="button" aria-label="Photo 2"><img src="assets/img/installation-fenetre.jpg" alt=""></button><button type="button" aria-label="Photo 3"><img src="assets/img/toile-detail-reelle.jpg" alt=""></button><button type="button" aria-label="Photo 4"><img src="assets/img/vue-interieure-posee.jpg" alt=""></button></div>
+      <div class="pp-main" id="pp-main"><img onclick="openLightbox(this.src)" src="assets/img/fenetre-ouverture.jpg" alt="Ouverture facile de la moustiquaire aimantée"><img onclick="openLightbox(this.src)" src="assets/img/installation-fenetre.jpg" alt="Installation chez un client"><img onclick="openLightbox(this.src)" src="assets/img/toile-detail-reelle.jpg" alt="Détail de la toile"><img onclick="openLightbox(this.src)" src="assets/img/vue-interieure-posee.jpg" alt="Vue depuis l’intérieur"><img onclick="openLightbox(this.src)" src="assets/img/fenetre-composants.jpg" alt="Composants fournis"></div>
+      <div class="pp-dots" id="pp-dots"><button type="button" aria-label="Photo 1" class="on"></button><button type="button" aria-label="Photo 2"></button><button type="button" aria-label="Photo 3"></button><button type="button" aria-label="Photo 4"></button><button type="button" aria-label="Photo 5"></button></div>
+      <div class="pp-thumbs" id="pp-thumbs"><button type="button" class="on" aria-label="Photo 1"><img src="assets/img/fenetre-ouverture.jpg" alt=""></button><button type="button" aria-label="Photo 2"><img src="assets/img/installation-fenetre.jpg" alt=""></button><button type="button" aria-label="Photo 3"><img src="assets/img/toile-detail-reelle.jpg" alt=""></button><button type="button" aria-label="Photo 4"><img src="assets/img/vue-interieure-posee.jpg" alt=""></button><button type="button" aria-label="Photo 5"><img src="assets/img/fenetre-composants.jpg" alt=""></button></div>
     </div>
     <div class="pp-info">
       <div class="pp-from">À partir de <b>45,00 €</b></div>
@@ -77,7 +78,7 @@
           <button class="btn-primary" onclick="addPP()">Ajouter au panier</button>
         </div>
         <div class="pp-pills"><span>💵 Paiement en liquide à la pose</span></div>
-        <div class="pp-added" id="pp-added"><b>✔ Ajouté au panier</b><div><a class="btn-primary" href="panier.html">Passer la commande</a><a class="btn-outline" href="index.html#services">Continuer</a></div></div>
+        <div class="pp-added" id="pp-added"><b>✔ Ajouté au panier</b><div><a class="btn-primary" href="panier.html">Aller au panier</a><a class="btn-outline" href="index.html#services">Continuer mes achats</a></div></div>
       </div>
     </div>
   </div>
@@ -134,9 +135,11 @@
     addToCart({ room: 'Moustiquaire aimantée', w: v.w, h: v.h, qty: v.qty, material: ppColor, price: calcPrice(v.w, v.h, v.qty) });
     document.getElementById('pp-added').style.display = 'block';
   }
-  const ppMain = document.getElementById('pp-main'), ppTh = [...document.querySelectorAll('#pp-thumbs button')];
-  ppTh.forEach((b, i) => b.addEventListener('click', () => ppMain.scrollTo({ left: i * ppMain.clientWidth, behavior: 'smooth' })));
-  ppMain.addEventListener('scroll', () => { const i = Math.round(ppMain.scrollLeft / ppMain.clientWidth); ppTh.forEach((b, k) => b.classList.toggle('on', k === i)); });
+  const ppMain = document.getElementById('pp-main'), ppTh = [...document.querySelectorAll('#pp-thumbs button')], ppDots = [...document.querySelectorAll('#pp-dots button')];
+  const goSlide = i => ppMain.scrollTo({ left: i * ppMain.clientWidth, behavior: 'smooth' });
+  ppTh.forEach((b, i) => b.addEventListener('click', () => goSlide(i)));
+  ppDots.forEach((b, i) => b.addEventListener('click', () => goSlide(i)));
+  ppMain.addEventListener('scroll', () => { const i = Math.round(ppMain.scrollLeft / ppMain.clientWidth); [...ppTh, ...ppDots].forEach((b, k) => b.classList.toggle('on', k % ppTh.length === i)); });
   updatePP();
 </script>
 </body>

@@ -170,7 +170,7 @@
 
   /* ============ PONT AVEC LE CONFIGURATEUR (page d'accueil) ============ */
   let windows = [];
-  try { windows = JSON.parse(localStorage.getItem('moustiko_cart') || '[]'); } catch(e) { windows = []; }
+  try { windows = JSON.parse(localStorage.getItem('moustiko_cart') || '[]').filter(i => i.sel !== false); } catch(e) { windows = []; }
 
   function orderLines() {
     return windows.map(w => w.room + ' ' + w.w + 'x' + w.h + ' cm ' + w.material + ' x' + w.qty + ' = ' + w.price + ' €').join(' | ');
@@ -466,8 +466,8 @@
     const hadOrder = windows.length > 0;
     document.getElementById('success-title').textContent = hadOrder ? 'Votre commande a bien été effectuée' : 'Rendez-vous confirmé !';
     document.getElementById('success-sub').textContent = hadOrder ? 'Paiement en liquide à la pose, le ' + getSelectedLabel() + '.' : 'Je me déplace chez vous à la date choisie.';
-    try { localStorage.removeItem('moustiko_cart'); } catch(e) {}
-    windows = []; updateCartBadge();
+    saveCart(getCart().filter(i => i.sel === false));
+    windows = [];
     currentStep = 4;
     document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
     document.getElementById('panel-4').classList.add('active');

@@ -263,4 +263,5 @@ function initNavCart() {
   updateCartBadge();
 }
 initNavCart();
- 
+
+const FREE_SHIP = 40; /* livraison offerte dès ce montant (€) */
