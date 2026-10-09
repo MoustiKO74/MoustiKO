@@ -13,6 +13,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=5">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Moustiquaire aimantée sur mesure — MoustiKO">
+  <meta property="og:description" content="Moustiquaire aimantée sur mesure, posée chez vous sans perçage. Cadre aluminium, toile maille fine, noir ou blanc, à partir de 45€. Intervention en Haute-Savoie.">
+  <meta property="og:url" content="https://moustiko74.fr/moustiquaire-aimantee.html">
+  <meta property="og:image" content="https://moustiko74.fr/assets/img/fenetre-ouverture.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 
@@ -25,7 +33,6 @@
   </a>
   <div class="nav-links">
     <a href="index.html#services">Nos produits</a>
-    <a href="index.html#tarifs">Tarifs</a>
     <a href="index.html#avis">Avis</a>
   </div>
   <button class="nav-search-btn" onclick="toggleSearch()" aria-label="Rechercher">🔍</button>
@@ -44,15 +51,15 @@
   <div class="pp">
     <div class="pp-title"><h1>Moustiquaire aimantée sur mesure</h1><div class="pp-best"><span class="best">#1 Meilleure vente</span> dans Moustiquaire fenêtre</div></div>
     <div class="pp-gallery">
-      <div class="pp-main" id="pp-main"><img onclick="openLightbox(this.src)" src="assets/img/fenetre-ouverture.jpg" alt="Ouverture facile de la moustiquaire aimantée"><img onclick="openLightbox(this.src)" src="assets/img/installation-fenetre.jpg" alt="Installation chez un client"><img onclick="openLightbox(this.src)" src="assets/img/toile-detail-reelle.jpg" alt="Détail de la toile"><img onclick="openLightbox(this.src)" src="assets/img/vue-interieure-posee.jpg" alt="Vue depuis l’intérieur"><img onclick="openLightbox(this.src)" src="assets/img/fenetre-composants.jpg" alt="Composants fournis"></div>
+      <div class="pp-main" id="pp-main"><img onclick="openLightbox(this.src)" src="assets/img/fenetre-ouverture.jpg" alt="Ouverture facile de la moustiquaire aimantée"><img onclick="openLightbox(this.src)" src="assets/img/installation-fenetre.jpg" alt="Installation chez un client" loading="lazy" decoding="async"><img onclick="openLightbox(this.src)" src="assets/img/toile-detail-reelle.jpg" alt="Détail de la toile" loading="lazy" decoding="async"><img onclick="openLightbox(this.src)" src="assets/img/vue-interieure-posee.jpg" alt="Vue depuis l’intérieur" loading="lazy" decoding="async"><img onclick="openLightbox(this.src)" src="assets/img/fenetre-composants.jpg" alt="Composants fournis" loading="lazy" decoding="async"></div>
       <div class="pp-dots" id="pp-dots"><button type="button" aria-label="Photo 1" class="on"></button><button type="button" aria-label="Photo 2"></button><button type="button" aria-label="Photo 3"></button><button type="button" aria-label="Photo 4"></button><button type="button" aria-label="Photo 5"></button></div>
-      <div class="pp-thumbs" id="pp-thumbs"><button type="button" class="on" aria-label="Photo 1"><img src="assets/img/fenetre-ouverture.jpg" alt=""></button><button type="button" aria-label="Photo 2"><img src="assets/img/installation-fenetre.jpg" alt=""></button><button type="button" aria-label="Photo 3"><img src="assets/img/toile-detail-reelle.jpg" alt=""></button><button type="button" aria-label="Photo 4"><img src="assets/img/vue-interieure-posee.jpg" alt=""></button><button type="button" aria-label="Photo 5"><img src="assets/img/fenetre-composants.jpg" alt=""></button></div>
+      <div class="pp-thumbs" id="pp-thumbs"><button type="button" class="on" aria-label="Photo 1"><img src="assets/img/fenetre-ouverture.jpg" alt="" loading="lazy" decoding="async"></button><button type="button" aria-label="Photo 2"><img src="assets/img/installation-fenetre.jpg" alt="" loading="lazy" decoding="async"></button><button type="button" aria-label="Photo 3"><img src="assets/img/toile-detail-reelle.jpg" alt="" loading="lazy" decoding="async"></button><button type="button" aria-label="Photo 4"><img src="assets/img/vue-interieure-posee.jpg" alt="" loading="lazy" decoding="async"></button><button type="button" aria-label="Photo 5"><img src="assets/img/fenetre-composants.jpg" alt="" loading="lazy" decoding="async"></button></div>
     </div>
     <div class="pp-info">
       <div class="pp-from">À partir de <b>45,00 €</b></div>
       <div class="cat-intro" id="cat-intro"><p>La moustiquaire aimantée sur mesure est une protection efficace, discrète et silencieuse pour vos fenêtres. Fabriquée à vos dimensions, elle se fixe grâce à une bande magnétique posée sur votre encadrement : aucun perçage, aucune trace, et elle se retire en un geste. Cadre aluminium, toile à maille fine, finition noire ou blanche. Je prends les mesures chez vous, puis je découpe et je pose la moustiquaire le jour même, partout en Haute-Savoie.</p></div>
       <button class="cat-more" onclick="toggleCat(this)">Lire la suite</button>
-      <div class="pp-badges"><span>⏱ Pose en moins d'1 h</span><span>📏 Fabriquée sur mesure</span><span>🧲 Sans perçage</span></div>
+      <div class="pp-badges"><span>⏱ Pose en moins d'1 h</span><span>📏 Fabriquée sur mesure</span><span>🧲 Sans perçage</span><span>🛡 Garantie 5 ans</span></div>
       <h2 class="pp-h2">Votre configuration</h2>
       <div class="pp-box">
         <div class="pp-sec">
@@ -93,27 +100,22 @@
   <div class="footer-links">
     <a href="avis.html" onclick="openAvisGate(event)">Donner avis</a>
     <a href="index.html#services">Services</a>
-    <a href="index.html#tarifs">Tarifs</a>
     <a href="rdv.html">Rendez-vous</a>
   </div>
+  <div class="footer-legal"><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a><a href="cgv.html">CGV</a><a href="remboursement.html">Remboursement</a></div>
   <div class="footer-bottom">© 2026 MoustiKO · Tous droits réservés</div>
 </footer>
 
 <div class="toast" id="toast"></div>
 
 <div class="lightbox-overlay" id="lightbox-overlay" onclick="closeLightbox()">
-  <img id="lightbox-img" src="" alt="Aperçu agrandi">
+  <img id="lightbox-img" src="" alt="Aperçu agrandi" loading="lazy" decoding="async">
 </div>
 
 <div class="cookie-banner" id="cookie-banner">
   <h4>🍪 Cookies</h4>
-  <p>Ce site utilise des cookies et technologies similaires pour vous garantir la meilleure expérience de navigation, mesurer l'audience et améliorer nos services. Vous pouvez accepter, refuser ou personnaliser vos préférences à tout moment.</p>
-  <div class="cookie-details" id="cookie-details">En réalité, MoustiKO n'utilise aucun cookie ni traceur — ce bandeau est affiché uniquement à titre visuel, pour illustrer à quoi ressemblerait un vrai bandeau de consentement.</div>
-  <div class="cookie-btns">
-    <button class="cookie-btn-refuse" onclick="handleCookie()">Refuser</button>
-    <button class="cookie-btn-more" onclick="toggleCookieDetails()">Plus d'options</button>
-    <button class="cookie-btn-accept" onclick="handleCookie()">Accepter</button>
-  </div>
+  <p>Ce site n’utilise aucun cookie de suivi ni de publicité. Un stockage local sur votre appareil sert uniquement à garder votre panier. <a href="confidentialite.html">En savoir plus</a></p>
+  <div class="cookie-btns"><button class="cookie-btn-accept" onclick="handleCookie()">OK, compris</button></div>
 </div>
 
 <script src="site.js?v=5"></script>

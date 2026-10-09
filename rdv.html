@@ -13,6 +13,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=5">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Prendre rendez-vous — MoustiKO">
+  <meta property="og:description" content="Prenez rendez-vous avec MoustiKO pour la pose de vos moustiquaires en Haute-Savoie. Samedi et dimanche, sans perçage, à partir de 45€.">
+  <meta property="og:url" content="https://moustiko74.fr/rdv.html">
+  <meta property="og:image" content="https://moustiko74.fr/assets/img/fenetre-ouverture.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 
@@ -25,7 +33,6 @@
   </a>
   <div class="nav-links">
     <a href="index.html#services">Nos produits</a>
-    <a href="index.html#tarifs">Tarifs</a>
     <a href="index.html#avis">Avis</a>
   </div>
   <button class="nav-search-btn" onclick="toggleSearch()" aria-label="Rechercher">🔍</button>
@@ -79,6 +86,8 @@
 
     <!-- STEP 2: Coordonnées -->
     <div class="step-panel" id="panel-2">
+      <input type="text" id="hp-field" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="rgpd-note">Ces informations servent uniquement à organiser votre rendez-vous. <a href="confidentialite.html">Confidentialité</a></p>
       <div class="recap-box">🗓 <span id="recap-date-1">—</span></div>
       <label class="field-label">Prénom et nom</label>
       <input type="text" class="full-input" id="rdv-nom" placeholder="ex: Camille Dupont">
@@ -105,11 +114,11 @@
       <div class="estimate-box" id="estimate-box">
         <div class="est-label">Montant estimé</div>
         <div class="est-amount" id="est-amount">À définir sur place</div>
-        <div class="est-note" id="est-note">Ajoutez vos fenêtres dans le <a href="index.html#tarifs" style="color:var(--vert-fonce);font-weight:700;">configurateur de l'accueil</a> pour une estimation, ou laissez-moi mesurer sur place — à partir de 45 €/fenêtre.</div>
+        <div class="est-note" id="est-note">Ajoutez une moustiquaire à votre panier pour une estimation, ou laissez-moi mesurer sur place — à partir de 45 €/fenêtre.</div>
       </div>
       <label class="checkbox-row">
         <input type="checkbox" id="payment-ack">
-        <span>J'ai compris que le paiement s'effectue en espèces à la fin de l'intervention.</span>
+        <span>J'ai compris que le paiement s'effectue en espèces à la fin de l'intervention, et j'accepte les <a href="cgv.html" target="_blank" rel="noopener">conditions générales de vente</a>.</span>
       </label>
       <div class="wizard-nav">
         <button class="btn-secondary" onclick="goToStep(2)">← Retour</button>
@@ -140,9 +149,9 @@
   <div class="footer-links">
     <a href="avis.html" onclick="openAvisGate(event)">Donner avis</a>
     <a href="index.html#services">Services</a>
-    <a href="index.html#tarifs">Tarifs</a>
     <a href="rdv.html">Rendez-vous</a>
   </div>
+  <div class="footer-legal"><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a><a href="cgv.html">CGV</a><a href="remboursement.html">Remboursement</a></div>
   <div class="footer-bottom">© 2026 MoustiKO · Tous droits réservés</div>
 </footer>
 
@@ -150,13 +159,8 @@
 
 <div class="cookie-banner" id="cookie-banner">
   <h4>🍪 Cookies</h4>
-  <p>Ce site utilise des cookies et technologies similaires pour vous garantir la meilleure expérience de navigation, mesurer l'audience et améliorer nos services. Vous pouvez accepter, refuser ou personnaliser vos préférences à tout moment.</p>
-  <div class="cookie-details" id="cookie-details">En réalité, MoustiKO n'utilise aucun cookie ni traceur — ce bandeau est affiché uniquement à titre visuel, pour illustrer à quoi ressemblerait un vrai bandeau de consentement.</div>
-  <div class="cookie-btns">
-    <button class="cookie-btn-refuse" onclick="handleCookie()">Refuser</button>
-    <button class="cookie-btn-more" onclick="toggleCookieDetails()">Plus d'options</button>
-    <button class="cookie-btn-accept" onclick="handleCookie()">Accepter</button>
-  </div>
+  <p>Ce site n’utilise aucun cookie de suivi ni de publicité. Un stockage local sur votre appareil sert uniquement à garder votre panier. <a href="confidentialite.html">En savoir plus</a></p>
+  <div class="cookie-btns"><button class="cookie-btn-accept" onclick="handleCookie()">OK, compris</button></div>
 </div>
 <script src="site.js?v=5"></script>
 <script>
@@ -405,13 +409,16 @@
     const nom = document.getElementById('rdv-nom').value.trim();
     const tel = document.getElementById('rdv-tel').value.trim();
     const addr = document.getElementById('rdv-adresse').value.trim();
-    if (!nom || !tel || !addr) { showToast('⚠️ Remplissez tous les champs'); return; }
+    if (nom.length < 2) { showToast('⚠️ Indiquez votre nom'); return; }
+    if (!/^(?:\+33\s?|0033\s?|0)[1-9](?:[\s.-]?\d{2}){4}$/.test(tel)) { showToast('⚠️ Numéro de téléphone invalide (ex. 06 12 34 56 78)'); return; }
+    if (addr.length < 8) { showToast('⚠️ Indiquez votre adresse complète'); return; }
     goToStep(3);
   }
 
   const FORMSPREE_URL = 'https://formspree.io/f/mwvdylev';
 
   async function confirmRdv() {
+    if (looksLikeSpam()) return;
     if (!document.getElementById('payment-ack').checked) {
       showToast('⚠️ Cochez la case pour confirmer le mode de paiement');
       return;

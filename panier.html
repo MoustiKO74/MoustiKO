@@ -14,6 +14,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=5">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Mon panier — MoustiKO">
+  <meta property="og:description" content="Moustiquaire aimantée sur mesure, posée chez vous sans perçage. Cadre aluminium, toile maille fine, noir ou blanc, à partir de 45€. Intervention en Haute-Savoie.">
+  <meta property="og:url" content="https://moustiko74.fr/panier.html">
+  <meta property="og:image" content="https://moustiko74.fr/assets/img/fenetre-ouverture.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 
@@ -26,7 +34,6 @@
   </a>
   <div class="nav-links">
     <a href="index.html#services">Nos produits</a>
-    <a href="index.html#tarifs">Tarifs</a>
     <a href="index.html#avis">Avis</a>
   </div>
   <button class="nav-search-btn" onclick="toggleSearch()" aria-label="Rechercher">🔍</button>
@@ -58,27 +65,22 @@
   <div class="footer-links">
     <a href="avis.html" onclick="openAvisGate(event)">Donner avis</a>
     <a href="index.html#services">Services</a>
-    <a href="index.html#tarifs">Tarifs</a>
     <a href="rdv.html">Rendez-vous</a>
   </div>
+  <div class="footer-legal"><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a><a href="cgv.html">CGV</a><a href="remboursement.html">Remboursement</a></div>
   <div class="footer-bottom">© 2026 MoustiKO · Tous droits réservés</div>
 </footer>
 
 <div class="toast" id="toast"></div>
 
 <div class="lightbox-overlay" id="lightbox-overlay" onclick="closeLightbox()">
-  <img id="lightbox-img" src="" alt="Aperçu agrandi">
+  <img id="lightbox-img" src="" alt="Aperçu agrandi" loading="lazy" decoding="async">
 </div>
 
 <div class="cookie-banner" id="cookie-banner">
   <h4>🍪 Cookies</h4>
-  <p>Ce site utilise des cookies et technologies similaires pour vous garantir la meilleure expérience de navigation, mesurer l'audience et améliorer nos services. Vous pouvez accepter, refuser ou personnaliser vos préférences à tout moment.</p>
-  <div class="cookie-details" id="cookie-details">En réalité, MoustiKO n'utilise aucun cookie ni traceur — ce bandeau est affiché uniquement à titre visuel, pour illustrer à quoi ressemblerait un vrai bandeau de consentement.</div>
-  <div class="cookie-btns">
-    <button class="cookie-btn-refuse" onclick="handleCookie()">Refuser</button>
-    <button class="cookie-btn-more" onclick="toggleCookieDetails()">Plus d'options</button>
-    <button class="cookie-btn-accept" onclick="handleCookie()">Accepter</button>
-  </div>
+  <p>Ce site n’utilise aucun cookie de suivi ni de publicité. Un stockage local sur votre appareil sert uniquement à garder votre panier. <a href="confidentialite.html">En savoir plus</a></p>
+  <div class="cookie-btns"><button class="cookie-btn-accept" onclick="handleCookie()">OK, compris</button></div>
 </div>
 
 <script src="site.js?v=5"></script>
@@ -106,7 +108,7 @@
     sum.innerHTML = '<div class="cs-line">Sous-total <b class="amz-p">' + amz(total) + '</b></div>' + ship + '<button class="cs-btn" onclick="goCheckout()">' + label + '</button>';
     bar.innerHTML = '<button class="cs-btn" onclick="goCheckout()">' + label + '</button>';
     items.innerHTML = '<a href="#" class="amz-all" onclick="toggleAll(event)">' + (sel.length === cart.length ? 'Désélectionner tous les articles' : 'Sélectionner tous les articles') + '</a>' +
-      cart.map((it, i) => '<div class="amz-item"><div class="amz-row"><div class="amz-img"><input type="checkbox" class="amz-cb" ' + (it.sel !== false ? 'checked' : '') + ' onchange="toggleSel(' + i + ')" aria-label="Sélectionner"><img src="assets/img/fenetre-ouverture.jpg" alt=""></div>' +
+      cart.map((it, i) => '<div class="amz-item"><div class="amz-row"><div class="amz-img"><input type="checkbox" class="amz-cb" ' + (it.sel !== false ? 'checked' : '') + ' onchange="toggleSel(' + i + ')" aria-label="Sélectionner"><img src="assets/img/fenetre-ouverture.jpg" alt="" loading="lazy" decoding="async"></div>' +
         '<div class="amz-info"><a class="amz-name" href="moustiquaire-aimantee.html">' + esc(fullName(it)) + '</a>' +
         '<div class="amz-best"><span class="best">#1 Meilleure vente</span> dans Moustiquaire fenêtre</div>' +
         '<div class="amz-price"><b class="amz-p">' + amz(it.price) + '</b>' + (PROMO_PCT ? ' <s>' + eur(promoOld(it.price)) + '</s>' : '') + '</div><div class="amz-stock">En stock</div></div></div>' +

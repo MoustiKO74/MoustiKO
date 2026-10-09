@@ -13,6 +13,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=5">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Donner mon avis — MoustiKO">
+  <meta property="og:description" content="Laissez votre avis sur MoustiKO, installateur de moustiquaires en Haute-Savoie. Votre avis m'aide à faire connaître mon travail.">
+  <meta property="og:url" content="https://moustiko74.fr/avis.html">
+  <meta property="og:image" content="https://moustiko74.fr/assets/img/fenetre-ouverture.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 
@@ -25,7 +33,6 @@
   </a>
   <div class="nav-links">
     <a href="index.html#services">Nos produits</a>
-    <a href="index.html#tarifs">Tarifs</a>
     <a href="index.html#avis">Avis</a>
   </div>
   <button class="nav-search-btn" onclick="toggleSearch()" aria-label="Rechercher">🔍</button>
@@ -66,8 +73,9 @@
     <input type="text" class="full-input" id="avis-commune" placeholder="ex: Annecy (74)">
     <label class="field-label">Votre avis</label>
     <textarea class="full-input" id="avis-comment" placeholder="Rapide, soigné, je recommande…"></textarea>
+    <input type="text" id="hp-field" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
     <button class="btn-primary" style="width:100%;" onclick="submitAvis()">Envoyer mon avis</button>
-    <p class="avis-privacy-note">Votre avis m'est envoyé pour relecture avant toute publication sur le site.</p>
+    <p class="avis-privacy-note">Votre avis m'est envoyé pour relecture avant toute publication sur le site. En l’envoyant, vous acceptez le traitement de ces données (<a href="confidentialite.html" style="color:var(--vert-fonce);font-weight:700;">confidentialité</a>).</p>
     <p class="avis-privacy-note">Pas encore fait sur Google ? <a href="https://g.page/r/CV-AxGSiEaj2EBM/review" target="_blank" rel="noopener" style="color:var(--vert-fonce);font-weight:700;">Laisser un avis Google</a></p>
   </div>
 </section>
@@ -81,9 +89,9 @@
   <div class="footer-links">
     <a href="avis.html" onclick="openAvisGate(event)">Donner avis</a>
     <a href="index.html#services">Services</a>
-    <a href="index.html#tarifs">Tarifs</a>
     <a href="rdv.html">Rendez-vous</a>
   </div>
+  <div class="footer-legal"><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a><a href="cgv.html">CGV</a><a href="remboursement.html">Remboursement</a></div>
   <div class="footer-bottom">© 2026 MoustiKO · Tous droits réservés</div>
 </footer>
 
@@ -91,13 +99,8 @@
 
 <div class="cookie-banner" id="cookie-banner">
   <h4>🍪 Cookies</h4>
-  <p>Ce site utilise des cookies et technologies similaires pour vous garantir la meilleure expérience de navigation, mesurer l'audience et améliorer nos services. Vous pouvez accepter, refuser ou personnaliser vos préférences à tout moment.</p>
-  <div class="cookie-details" id="cookie-details">En réalité, MoustiKO n'utilise aucun cookie ni traceur — ce bandeau est affiché uniquement à titre visuel, pour illustrer à quoi ressemblerait un vrai bandeau de consentement.</div>
-  <div class="cookie-btns">
-    <button class="cookie-btn-refuse" onclick="handleCookie()">Refuser</button>
-    <button class="cookie-btn-more" onclick="toggleCookieDetails()">Plus d'options</button>
-    <button class="cookie-btn-accept" onclick="handleCookie()">Accepter</button>
-  </div>
+  <p>Ce site n’utilise aucun cookie de suivi ni de publicité. Un stockage local sur votre appareil sert uniquement à garder votre panier. <a href="confidentialite.html">En savoir plus</a></p>
+  <div class="cookie-btns"><button class="cookie-btn-accept" onclick="handleCookie()">OK, compris</button></div>
 </div>
 <script src="site.js?v=5"></script>
 <script>
@@ -115,6 +118,7 @@
   });
 
   async function submitAvis() {
+    if (looksLikeSpam()) { showToast("✓ Merci, votre avis m'a été envoyé !"); return; }
     const name = document.getElementById('avis-nom').value.trim();
     const commune = document.getElementById('avis-commune').value.trim();
     const comment = document.getElementById('avis-comment').value.trim();
