@@ -1,3 +1,5 @@
+/* HTTPS forcé */
+if (location.protocol === 'http:' && !/^(localhost|127\.)/.test(location.hostname)) { location.replace('https:' + location.href.substring(location.protocol.length)); }
 /* ============ SCRIPT PARTAGÉ — pages produits ============ */
 /* Léger : lightbox photo, bandeau cookies, animations au scroll. */
 
@@ -26,6 +28,7 @@ function handleCookie() {
   try { localStorage.setItem('moustiko_cookie_seen', '1'); } catch (e) {}
 }
 function initCookieBanner() {
+  if (!document.getElementById('cookie-banner')) return;
   let seen = false;
   try { seen = localStorage.getItem('moustiko_cookie_seen') === '1'; } catch (e) {}
   if (!seen) {
@@ -42,6 +45,9 @@ function setupScrollReveal() {
     .forEach(el => el.classList.add('reveal-stagger'));
   document.querySelectorAll('.configurator, .wizard-wrap, .avis-form-card')
     .forEach(el => el.classList.add('reveal-scale'));
+
+  document.querySelectorAll('.section > *, .why-card, .pp-gallery, .pp-info, .cat-page > *, .cart-page > *, .legal > *')
+    .forEach(el => { if (!el.matches('.reveal-stagger, .reveal-scale')) el.classList.add('reveal'); });
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -76,8 +82,8 @@ const SEARCH_ITEMS = [
   { label: 'Moustiquaire de porte', url: 'porte.html', keywords: 'porte door entree entrée' },
   { label: 'Moustiquaire baie vitrée', url: 'baie-vitree.html', keywords: 'baie vitree vitrée coulissante' },
   { label: 'Moustiquaire Velux', url: 'velux.html', keywords: 'velux toit fenetre de toit' },
+  { label: 'Mon panier', url: 'panier.html', keywords: 'panier commande achat' },
   { label: 'Prendre rendez-vous', url: 'rdv.html', keywords: 'rdv rendez vous rendezvous reservation' },
-  { label: 'Tarifs & configurateur', url: 'index.html#tarifs', keywords: 'tarif prix devis configurateur' },
   { label: 'Avis clients', url: 'index.html#avis', keywords: 'avis review commentaire' },
 ];
 
@@ -265,3 +271,19 @@ function initNavCart() {
 initNavCart();
 
 const FREE_SHIP = 40; /* livraison offerte dès ce montant (€) */
+
+/* ============ ANTI-SPAM (leurre + délai minimal) ============ */
+const __t0 = Date.now();
+function looksLikeSpam() {
+  const h = document.getElementById('hp-field');
+  return !!(h && h.value) || Date.now() - __t0 < 3000;
+}
+
+/* ============ MESURE D'AUDIENCE SANS COOKIE (GoatCounter) ============ */
+const GOATCOUNTER_CODE = ''; /* ex. 'moustiko' après création gratuite sur goatcounter.com */
+if (GOATCOUNTER_CODE) {
+  const gs = document.createElement('script');
+  gs.async = true; gs.src = 'https://gc.zgo.at/count.js';
+  gs.dataset.goatcounter = 'https://' + GOATCOUNTER_CODE + '.goatcounter.com/count';
+  document.head.appendChild(gs);
+}

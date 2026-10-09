@@ -2045,3 +2045,24 @@ body.has-sticky{padding-bottom:76px}
 .why-cols{display:grid;gap:22px}
 .why-cols span{font-size:2rem}.why-cols h4{font-family:var(--font-display);font-size:1.02rem;margin:6px 0}.why-cols p{font-size:.9rem;line-height:1.55}
 @media(min-width:700px){.why-cols{grid-template-columns:1fr 1fr}}@media(min-width:1100px){.why-cols{grid-template-columns:repeat(5,1fr)}}
+
+/* ── ÉTAPE QUALITÉ : contraste, animations, pages légales ── */
+.best{background:#067d62}
+.btn-primary,.badge-new,.status-pill.available{background:linear-gradient(135deg,#6d7d3a,#566629);color:#fff}
+.btn-outline{color:#566629;border-color:#566629}
+.btn-outline:hover{background:#566629;color:#fff}
+footer .footer-bottom{color:#a9b0b6}
+.footer-legal{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin-bottom:12px;font-size:.8rem}
+.footer-legal a{color:#c4cad0;text-decoration:none}.footer-legal a:hover{text-decoration:underline}
+.pcard.soon{filter:grayscale(1);opacity:.6}
+.pcard.soon .btn-outline{border-color:#888;color:#666;background:none}
+.reveal{transform:translateY(44px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal-stagger>*{transform:translateY(44px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.rgpd-note{font-size:.8rem;color:var(--gris-moyen);margin-bottom:12px}.rgpd-note a{color:#566629;font-weight:600}
+.legal{max-width:780px;margin:0 auto;padding:36px 20px 70px;line-height:1.65}
+.legal h1{font-family:var(--font-display);font-size:1.8rem;margin-bottom:6px}
+.legal h2{font-size:1.1rem;margin:26px 0 6px}.legal ul{padding-left:20px}.legal li{margin-bottom:8px}
+.legal a{color:#566629;text-decoration:underline}.maj{color:var(--gris-moyen);font-size:.85rem;margin-bottom:10px}
+.todo{background:#fff3b0;padding:0 3px;border-radius:3px}
+.legal.nf{text-align:center;padding:80px 20px}.legal.nf .btn-primary{display:inline-block;text-decoration:none;margin-top:10px}

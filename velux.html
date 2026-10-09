@@ -13,6 +13,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=5">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Moustiquaire Velux — Bientôt disponible — MoustiKO">
+  <meta property="og:description" content="Moustiquaire sur mesure pour fenêtre de toit Velux en Haute-Savoie. Compatible avec la plupart des modèles. Lancement prévu été 2026.">
+  <meta property="og:url" content="https://moustiko74.fr/velux.html">
+  <meta property="og:image" content="https://moustiko74.fr/assets/img/fenetre-ouverture.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 
@@ -25,7 +33,6 @@
   </a>
   <div class="nav-links">
     <a href="index.html#services">Nos produits</a>
-    <a href="index.html#tarifs">Tarifs</a>
     <a href="index.html#avis">Avis</a>
   </div>
   <button class="nav-search-btn" onclick="toggleSearch()" aria-label="Rechercher">🔍</button>
@@ -79,7 +86,7 @@
     </div>
   </div>
   <div class="photo-detail-card">
-    <img onclick="openLightbox(this.src)" class="zoomable" src="assets/img/produit-velux.jpg" alt="Moustiquaire Velux">
+    <img onclick="openLightbox(this.src)" class="zoomable" src="assets/img/produit-velux.jpg" alt="Moustiquaire Velux" loading="lazy" decoding="async">
     <div class="photo-detail-text">
       <h4>Aperçu</h4>
       <p>Visuel provisoire — les photos définitives seront ajoutées au lancement.</p>
@@ -108,25 +115,20 @@
   <div class="footer-links">
     <a href="avis.html" onclick="openAvisGate(event)">Donner avis</a>
     <a href="index.html#services">Services</a>
-    <a href="index.html#tarifs">Tarifs</a>
     <a href="rdv.html">Rendez-vous</a>
   </div>
+  <div class="footer-legal"><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a><a href="cgv.html">CGV</a><a href="remboursement.html">Remboursement</a></div>
   <div class="footer-bottom">© 2026 MoustiKO · Tous droits réservés</div>
 </footer>
 
 <div class="lightbox-overlay" id="lightbox-overlay" onclick="closeLightbox()">
-  <img id="lightbox-img" src="" alt="Aperçu agrandi">
+  <img id="lightbox-img" src="" alt="Aperçu agrandi" loading="lazy" decoding="async">
 </div>
 
 <div class="cookie-banner" id="cookie-banner">
   <h4>🍪 Cookies</h4>
-  <p>Ce site utilise des cookies et technologies similaires pour vous garantir la meilleure expérience de navigation, mesurer l'audience et améliorer nos services. Vous pouvez accepter, refuser ou personnaliser vos préférences à tout moment.</p>
-  <div class="cookie-details" id="cookie-details">En réalité, MoustiKO n'utilise aucun cookie ni traceur — ce bandeau est affiché uniquement à titre visuel, pour illustrer à quoi ressemblerait un vrai bandeau de consentement.</div>
-  <div class="cookie-btns">
-    <button class="cookie-btn-refuse" onclick="handleCookie()">Refuser</button>
-    <button class="cookie-btn-more" onclick="toggleCookieDetails()">Plus d'options</button>
-    <button class="cookie-btn-accept" onclick="handleCookie()">Accepter</button>
-  </div>
+  <p>Ce site n’utilise aucun cookie de suivi ni de publicité. Un stockage local sur votre appareil sert uniquement à garder votre panier. <a href="confidentialite.html">En savoir plus</a></p>
+  <div class="cookie-btns"><button class="cookie-btn-accept" onclick="handleCookie()">OK, compris</button></div>
 </div>
 
 <script src="site.js?v=5"></script>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://moustiko74.fr/confidentialite.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Comment MoustiKO collecte et protège vos données personnelles (RGPD), et ce que le site stocke sur votre appareil.">
+  <meta property="og:site_name" content="MoustiKO">
+  <title>Politique de confidentialité et cookies — MoustiKO</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="favicon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=5">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Politique de confidentialité et cookies — MoustiKO">
+  <meta property="og:description" content="Comment MoustiKO collecte et protège vos données personnelles (RGPD), et ce que le site stocke sur votre appareil.">
+  <meta property="og:url" content="https://moustiko74.fr/confidentialite.html">
+  <meta property="og:image" content="https://moustiko74.fr/assets/img/fenetre-ouverture.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+<!-- NAV -->
+<div class="top-banner">🚚 Livraison offerte</div>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/img/logo.png" alt="MoustiKO">
+    <span class="nav-logo-text">Mousti<span>KO</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#services">Nos produits</a>
+    <a href="index.html#avis">Avis</a>
+  </div>
+  <button class="nav-search-btn" onclick="toggleSearch()" aria-label="Rechercher">🔍</button>
+</nav>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" oninput="filterSearch()" placeholder="fenêtre, porte, baie vitrée, velux..." autocomplete="off">
+    <button class="search-close" onclick="closeSearch()" aria-label="Fermer la recherche">✕</button>
+  </div>
+  <div class="search-results" id="search-results"></div>
+</div>
+<main class="legal">
+<h1>Politique de confidentialité et cookies</h1><p class="maj">Dernière mise à jour : 9 octobre 2026</p>
+<h2>Responsable du traitement</h2>
+<p>MoustiKO (voir les <a href="mentions-legales.html">mentions légales</a>). Contact : <a href="tel:+33761559872">07 61 55 98 72</a> ou <mark class="todo">[adresse email]</mark>.</p>
+<h2>Données collectées, uniquement le nécessaire</h2>
+<ul>
+<li><b>Rendez-vous et commande</b> : nom, adresse d’intervention, téléphone, contenu de la commande et créneau choisi. Finalité : préparer et réaliser la mesure et la pose. Base légale : exécution du contrat ou de mesures précontractuelles. Conservation : durée de la relation commerciale, puis archivage selon les obligations légales (comptabilité : 10 ans).</li>
+<li><b>Avis</b> : prénom, commune, note et texte. Finalité : publication après relecture. Base légale : votre consentement. Conservation : tant que l’avis est publié, ou jusqu’à votre demande de retrait.</li>
+</ul>
+<p>Aucune autre donnée n’est demandée. Vos données ne sont ni vendues ni utilisées pour de la publicité.</p>
+<h2>Destinataires et sous-traitants</h2>
+<p>Formspree (transmission des formulaires par email), GitHub (hébergement du site) et Google Fonts (polices d’écriture, votre adresse IP est transmise à Google pour les charger). Ces prestataires sont situés aux États-Unis ; les transferts s’appuient sur les garanties prévues par le RGPD (clauses contractuelles types ou cadre de protection des données UE–États-Unis).</p>
+<h2>Vos droits</h2>
+<p>Vous pouvez demander l’accès, la rectification, l’effacement, la limitation ou la portabilité de vos données, et vous opposer à leur traitement, en nous contactant. Vous pouvez aussi saisir la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>).</p>
+<h2>Cookies et stockage local</h2>
+<p>Ce site n’utilise aucun cookie de suivi ni de publicité. Il enregistre seulement sur votre appareil, en stockage local : votre panier et le fait que vous avez fermé le bandeau d’information. Ces éléments sont strictement nécessaires au fonctionnement du site et ne demandent pas de consentement.</p>
+<p>Une mesure d’audience sans cookie et anonyme peut être utilisée pour connaître la fréquentation du site. Elle ne vous identifie pas.</p>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-wordmark">Mousti<span>KO</span></div>
+  <div class="footer-tagline">Moustiquaires sur mesure</div>
+  <div class="footer-since">✦ Depuis 2026</div>
+  <p class="footer-region">Haute-Savoie (74) — Intervention à domicile</p>
+  <div class="footer-links">
+    <a href="avis.html" onclick="openAvisGate(event)">Donner avis</a>
+    <a href="index.html#services">Services</a>
+    <a href="rdv.html">Rendez-vous</a>
+  </div>
+  <div class="footer-legal"><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a><a href="cgv.html">CGV</a><a href="remboursement.html">Remboursement</a></div>
+  <div class="footer-bottom">© 2026 MoustiKO · Tous droits réservés</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<div class="cookie-banner" id="cookie-banner">
+  <h4>🍪 Cookies</h4>
+  <p>Ce site n’utilise aucun cookie de suivi ni de publicité. Un stockage local sur votre appareil sert uniquement à garder votre panier. <a href="confidentialite.html">En savoir plus</a></p>
+  <div class="cookie-btns"><button class="cookie-btn-accept" onclick="handleCookie()">OK, compris</button></div>
+</div>
+<script src="site.js?v=5"></script>
+</body>
+</html>
